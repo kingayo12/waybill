@@ -2018,36 +2018,30 @@
         async function shareWaybillAsImage() {
             const waybill = document.querySelector('.waybill_container');
 
-            if (!waybill) {
-                console.error("Waybill container not found.");
-                return;
-            }
-
-            try {
-                const canvas = await html2canvas(waybill, { scale: 2 });
+            html2canvas(waybill, { scale: 2 }).then(async (canvas) => {
                 const imgData = canvas.toDataURL("image/png");
 
-                if (navigator.share) {
+                // Convert base64 to a Blob
+                const blob = await fetch(imgData).then(res => res.blob());
+                const file = new File([blob], "waybill.png", { type: "image/png" });
+
+                // Check if Web Share API is available
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
                         await navigator.share({
-                            title: 'Waybill Document',
-                            text: 'Here is the waybill document.',
-                            url: imgData,
+                            title: "Waybill Document",
+                            text: "Here is the waybill document.",
+                            files: [file]
                         });
-                        console.log('Shared successfully');
                     } catch (error) {
-                        console.error('Sharing failed:', error);
-                        copyToClipboard(imgData); // Fallback
+                        console.error("Error sharing:", error);
                     }
                 } else {
-                    copyToClipboard(imgData); // Fallback
+                    alert("Sharing not supported on this device.");
                 }
-
-            } catch (error) {
-                console.error("Error capturing or sharing waybill:", error);
-                alert("An error occurred while capturing or sharing the waybill.");
-            }
+            });
         }
+
 
         function copyToClipboard(text) {
             const tempInput = document.createElement('textarea');
