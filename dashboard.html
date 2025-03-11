@@ -933,6 +933,28 @@
 
 
     <script>
+
+        function updateUserImage() {
+            const username = document.getElementById("username").innerHTML;
+            const firstLetter = username.charAt(0).toUpperCase();
+            const img = document.querySelector(".user_img img");
+            const userInitial = document.querySelector(".user_initial");
+
+            if (img.src === "" || img.src.endsWith("/")) {
+                img.style.display = "none";
+                userInitial.textContent = firstLetter;
+                userInitial.style.display = "flex";
+            } else {
+                img.style.display = "block";
+                userInitial.style.display = "none";
+
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateUserImage();
+        });
+
         function handleFileUpload(event) {
             const file = event.target.files[0]; // Get the selected file
             if (file) {
@@ -1042,26 +1064,6 @@
         // Enable search on input keyup
         document.getElementById("searchInput").addEventListener("keyup", searchBoxes);
 
-        function updateUserImage() {
-            const username = document.getElementById("username").innerHTML;
-            const firstLetter = username.charAt(0).toUpperCase();
-            const img = document.querySelector(".user_img img");
-            const userInitial = document.querySelector(".user_initial");
-
-            if (img.src === "" || img.src.endsWith("/")) {
-                img.style.display = "none";
-                userInitial.textContent = firstLetter;
-                userInitial.style.display = "flex";
-            } else {
-                img.style.display = "block";
-                userInitial.style.display = "none";
-
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            updateUserImage();
-        });
 
     </script>
 
