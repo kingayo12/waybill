@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      :root {
+        --csl-color: #003399;
+        --csl-line-color: #003399;
+        --csl-text-color: #000000;
+      }
+      .outer-circle {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+      }
+      .inner-circle {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+      }
+      .inner-circle1 {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 1;
+      }
+      .text-main {
+        font-family: Arial, sans-serif;
+        font-size: 40px;
+        font-weight: bold;
+        fill: var(--csl-text-color);
+        text-anchor: middle;
+      }
+      .text-secondary {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        fill: var(--csl-text-color);
+        text-anchor: middle;
+        text-transform: uppercase;
+      }
+      .dotted-line {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+        stroke-dasharray: 5 5;
+      }
+      .stampdate {
+        text-anchor: middle;
+        font-size: 20px;
+        font-weight: bold;
+        fill: var(--csl-text-color);
+      }
+      .lines {
+        stroke: var(--csl-line-color);
+        stroke-width: 1;
+      }
+      .dot {
+        fill: transparent;
+        stroke: var(--csl-color);
+      }
+    </style>
+    <path id="topTextPath" d="M 45,128 A 123,91 0 0,1 255,128" />
+    <path id="bottomTextPath" d="M 45,182 A 113,70 0 0,0 255,182" />
+  </defs>
+  <g>
+    <!-- Outer circle -->
+    <ellipse cx="150" cy="150" rx="140" ry="100" class="outer-circle" />
+    <!-- Inner circles -->
+    <ellipse cx="150" cy="150" rx="125" ry="85" class="inner-circle" />
+    <ellipse cx="150" cy="150" rx="138" ry="98" class="inner-circle1" />
+    <!-- Center text -->
+    <text x="150" y="145" class="text-main">PAID</text>
+    <!-- Curved upper text -->
+    <text class="text-secondary">
+      <textPath href="#topTextPath" startOffset="50%">CODESPRO STAMP</textPath>
+    </text>
+    <!-- Curved lower text -->
+    <text class="text-secondary">
+      <textPath href="#bottomTextPath" startOffset="50%">CODESPRO STAMP</textPath>
+    </text>
+    <!-- Horizontal lines -->
+    <line class="lines" x1="60" y1="150" x2="240" y2="150" />
+    <line class="lines" x1="80" y1="180" x2="220" y2="180" />
+    <!-- Date -->
+    <text class="stampdate" x="150" y="170" id="dateText">18-04-2024</text>
+    <!-- Dots inside the inner circle -->
+    <circle cx="40" cy="150" r="4" class="dot csl_stamp_color" />
+    <circle cx="40" cy="150" r="2.5" class="dot csl_stamp_color" />
+    <circle cx="41" cy="140" r="3.5" class="dot csl_stamp_color" />
+    <circle cx="41" cy="160" r="3.5" class="dot csl_stamp_color" />
+    
+
+
+    <circle cx="260" cy="150" r="4" class="dot csl_stamp_color" />
+   
+    <circle cx="260" cy="150" r="2.5" class="dot csl_stamp_color" />
+    <circle cx="259" cy="139" r="3.5" class="dot csl_stamp_color" />
+
+    <circle cx="260" cy="160" r="3.5" class="dot csl_stamp_color" />
+ 
+  </g>
+</svg>

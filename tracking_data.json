@@ -1,0 +1,154 @@
+[
+  {
+    "track_id": "XY-1234-LAG",
+    "bl_no": "BL-001234",
+    "status": "In transit",
+    "eta": "30 mins",
+    "time": "06:15:00",
+    "route": ["Ojodu Berger, Lagos", "Ikeja, Lagos", "Lekki Phase 1, Lagos"],
+    "truck": {
+      "truck_number": "ABJRK-12345",
+      "capacity": "10,000 kg",
+      "plate_number": "XY-9876-LAG",
+      "last_maintenance": "12th Feb 2025",
+      "fuel_type": "Diesel",
+      "status": "Available"
+    },
+    "driver": {
+      "name": "Adewale Ayuba",
+      "license_number": "DL-987654",
+      "contact": "+234 812 345 6789",
+      "emergency_contact": {
+        "name": "Boluwatife - Wife",
+        "phone": "+234 801 234 5678"
+      },
+      "address": "23, Olowu Street, Lagos, Nigeria",
+      "assigned_vehicle": "ABJRK-12345",
+      "status": "Active"
+    },
+    "company": {
+      "name": "DAO Logistics Ltd.",
+      "address": "12 Marina Road, Lagos, Nigeria",
+      "contact_number": "+234 812 345 6789",
+      "email": "info@daologistics.com",
+      "website": "https://www.daologistics.com",
+      "established": "2015",
+      "services": ["Freight", "Warehousing", "Transportation", "Customs Clearance"],
+      "employees": "250+"
+    }
+  },
+  {
+    "track_id": "AB-5678-LAG",
+    "bl_no": "BL-002567",
+    "status": "Arrived",
+    "eta": "Completed",
+    "time": "10:00:00",
+    "route": ["Garki, Abuja", "Maitama, Abuja", "Wuse 2, Abuja", "Asokoro, Abuja"],
+    "truck": {
+      "truck_number": "CDJHK-5678",
+      "capacity": "15,000 kg",
+      "plate_number": "AB-5678-LAG",
+      "last_maintenance": "5th Jan 2025",
+      "fuel_type": "Petrol",
+      "status": "In Use"
+    },
+    "driver": {
+      "name": "baba tunde",
+      "license_number": "DL-123456",
+      "contact": "+234 901 234 5678",
+      "emergency_contact": {
+        "name": "Yetunde tunde - Wife",
+        "phone": "+234 809 876 5432"
+      },
+      "address": "15, Adeola Street, Abuja, Nigeria",
+      "assigned_vehicle": "CDJHK-5678",
+      "status": "Active"
+    },
+    "company": {
+      "name": "DAO Logistics Ltd.",
+      "address": "12 Marina Road, Lagos, Nigeria",
+      "contact_number": "+234 812 345 6789",
+      "email": "info@daologistics.com",
+      "website": "https://www.daologistics.com",
+      "established": "2015",
+      "services": ["Freight", "Warehousing", "Transportation", "Customs Clearance"],
+      "employees": "250+"
+    }
+  },
+  {
+    "track_id": "KL-4567-ABJ",
+    "bl_no": "BL-003789",
+    "status": "Awaiting takeoff",
+    "eta": "10:00:00",
+    "time": "1 hour left",
+    "route": ["Sabon Gari, Kano", "Tarauni, Kano", "Bompai, Kano"],
+    "truck": {
+      "truck_number": "XYZ-3456",
+      "capacity": "8,000 kg",
+      "plate_number": "KL-4567-ABJ",
+      "last_maintenance": "10th Feb 2025",
+      "fuel_type": "Diesel",
+      "status": "Available"
+    },
+    "driver": {
+      "name": "Michael Olawale",
+      "license_number": "DL-234567",
+      "contact": "+234 809 123 4567",
+      "emergency_contact": {
+        "name": "Grace Olawale - Wife",
+        "phone": "+234 802 345 6789"
+      },
+      "address": "10, Garki Street, Abuja, Nigeria",
+      "assigned_vehicle": "XYZ-3456",
+      "status": "Pending"
+    },
+    "company": {
+      "name": "DAO Logistics Ltd.",
+      "address": "12 Marina Road, Lagos, Nigeria",
+      "contact_number": "+234 812 345 6789",
+      "email": "info@daologistics.com",
+      "website": "https://www.daologistics.com",
+      "established": "2015",
+      "services": ["Freight", "Warehousing", "Transportation", "Customs Clearance"],
+      "employees": "250+"
+    }
+  },
+  {
+    "track_id": "MN-7890-PHC",
+    "bl_no": "BL-004910",
+    "status": "Arrived",
+    "eta": "15:30:00",
+    "time": "6 hours left",
+    "route": ["Mile 3, Port Harcourt", "GRA Phase 2, Port Harcourt", "Rumuokoro, Port Harcourt"],
+    "truck": {
+      "truck_number": "GHI-7890",
+      "capacity": "20,000 kg",
+      "plate_number": "MN-7890-PHC",
+      "last_maintenance": "2nd Jan 2025",
+      "fuel_type": "CNG",
+      "status": "In Use"
+    },
+    "driver": {
+      "name": "Emeka Nnamdi",
+      "license_number": "DL-567890",
+      "contact": "+234 808 567 8901",
+      "emergency_contact": {
+        "name": "Chisom Nnamdi - Sister",
+        "phone": "+234 802 789 0123"
+      },
+      "address": "14, Creek Road, Port Harcourt, Nigeria",
+      "assigned_vehicle": "GHI-7890",
+      "status": "Active"
+    },
+    "company": {
+      "name": "DAO Logistics Ltd.",
+      "address": "12 Marina Road, Lagos, Nigeria",
+      "contact_number": "+234 812 345 6789",
+      "email": "info@daologistics.com",
+      "website": "https://www.daologistics.com",
+      "established": "2015",
+      "services": ["Freight", "Warehousing", "Transportation", "Customs Clearance"],
+      "employees": "250+"
+    }
+  }
+]

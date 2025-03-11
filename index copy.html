@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <link rel="stylesheet" href="waybill.css">
+
+    <title>Document</title>
+    <script>
+        function updateScale(value) {
+            const waybill = document.querySelector('.waybill_container');
+
+            let scaleValue = 1; // Default (100%)
+            if (value == 0) scaleValue = 0; // Hide
+            else if (value == 1) scaleValue = 1; // Normal (100%)
+            else if (value == 2) scaleValue = 2; // Zoomed (200%)
+
+            waybill.style.zoom = `(${scaleValue})`;
+            // waybill.style.transformOrigin = "top center";
+
+            // Hide waybill when scale is 0
+            waybill.style.display = scaleValue === 0 ? "none" : "block";
+        }
+    </script>
+</head>
+
+<body>
+
+
+    <div class="epod_cont cpsl">
+        <aside>
+            <nav class="epod_nav">
+
+                <div class="user_wrap" onclick="ToggleNavMenu(this)">
+                    <div class="user_img">
+                        <img src="/" alt="">
+                        <div class="user_initial"></div>
+                    </div>
+                    <div class="wrap_flex">
+                        <h6>Welcome</h6>
+                        <h2 id="username">Wisdom</h4>
+                    </div>
+
+                </div>
+                <ul>
+
+
+                    <!-- <li class="nav-item"><a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#"><i class="fas fa-truck"></i>Waybill Management <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fas fa-plus-circle"></i>Create Waybill</a></li>
+                            <li><a href="#"><i class="fas fa-search"></i>Track Waybill</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#"><i class="fas fa-chart-bar"></i>Reports &#9662;</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fas fa-calendar-day"></i>Daily Reports</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-alt"></i>Monthly Reports</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="nav-item settings"><a href="#"><i class="fas fa-cog"></i>Settings</a></li>
+                    <li class="nav-item signout"><a href="#"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="epod_tracking">
+                <div class="header">
+                    <h3>Tracking</h3>
+                    <div class="search_cont" onclick="handleDropSearch()">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+                <div class="search_box">
+
+                    <div class="search">
+                        <input type="search" placeholder="Search..." name="" id="searchInput">
+                        <div class="search_icon" onclick="searchBoxes()">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox Filters -->
+                    <!-- <div class="filter_options">
+                        <label>
+                            <input type="checkbox" class="filter_checkbox" value="bl">
+                            BL
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter_checkbox" value="consignment">
+                            Consignment
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter_checkbox" value="waybill">
+                            Waybill
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter_checkbox" value="status">
+                            Status
+                        </label>
+                    </div> -->
+
+                </div>
+                <div class="filter_lists">
+                    <div class="header small">filter</div>
+                    <div class="filter_list">
+                        <div class="list filter" data-filter="Pending">
+                            <div class="toggle_switch">
+                                <span class="filter_text">Awaiting takeoff</span>
+                                <div class="toggle_ball"></div>
+                            </div>
+                        </div>
+                        <div class="list filter" data-filter="Completed">
+                            <div class="toggle_switch">
+                                <span class="filter_text">In transit</span>
+                                <div class="toggle_ball"></div>
+                            </div>
+                        </div>
+                        <div class="list filter" data-filter="Cancelled">
+                            <div class="toggle_switch">
+                                <span class="filter_text">Arrived</span>
+                                <div class="toggle_ball"></div>
+                            </div>
+                        </div>
+                        <div class="list filter" data-filter="In Progress">
+                            <div class="toggle_switch">
+                                <span class="filter_text">Completed</span>
+                                <div class="toggle_ball"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="header small">show</div> -->
+
+
+                </div>
+                <div class="epod_content">
+                    <div class="map_t"></div>
+                    <div class="epod_boxes">
+                        <div class="epod_dash_box">
+                            <div class="header">
+                                <div class="track_id">XY-1234-LAG</div>
+                                <div class="status">
+                                    <div class="stats"></div>
+                                    <p>In transit</p>
+                                </div>
+                            </div>
+                            <div class="truck_destination">
+                                <div class="time_details">
+                                    <span class="time">06:15:00</span>
+                                    <span class="day">30 mins left</span>
+                                </div>
+                                <div class="destination_info">
+                                    <div class="route active">Ojodu Berger, Lagos</div>
+                                    <div class="route active">Ikeja, Lagos</div>
+                                    <div class="route">Lekki Phase 1, Lagos</div>
+                                </div>
+                            </div>
+                            <div class="truck_img">
+                                <img src="img.png" alt="truckdetails">
+                            </div>
+                            <div class="bl_no" style="display: none;">BL-001234</div>
+                        </div>
+                        <div class="epod_dash_box">
+                            <div class="header">
+                                <div class="track_id">XY-5678-ABJ</div>
+                                <div class="status">
+                                    <div class="stats"></div>
+                                    <p>Arrived</p>
+                                </div>
+                            </div>
+                            <div class="truck_destination">
+                                <div class="time_details">
+                                    <span class="time">08:45:00</span>
+                                    <span class="day">2 mins left</span>
+                                </div>
+                                <div class="destination_info">
+                                    <div class="route active">Garki, Abuja</div>
+                                    <div class="route active">Maitama, Abuja</div>
+                                    <div class="route active">Wuse 2, Abuja</div>
+                                    <div class="route active">Asokoro, Abuja</div>
+                                </div>
+                            </div>
+                            <div class="truck_img">
+                                <img src="img.png" alt="truckdetails">
+                            </div>
+                            <div class="bl_no" style="display: none;">BL-005678</div>
+                        </div>
+                        <div class="epod_dash_box">
+                            <div class="header">
+                                <div class="track_id">XY-9101-KAN</div>
+                                <div class="status">
+                                    <div class="stats"></div>
+                                    <p>Awaiting takeoff</p>
+                                </div>
+                            </div>
+                            <div class="truck_destination">
+                                <div class="time_details">
+                                    <span class="time">09:10:00</span>
+                                    <span class="day">1 hour left</span>
+                                </div>
+                                <div class="destination_info">
+                                    <div class="route">Sabon Gari, Kano</div>
+                                    <div class="route">Tarauni, Kano</div>
+                                    <div class="route">Bompai, Kano</div>
+                                </div>
+                            </div>
+                            <div class="truck_img">
+                                <img src="img.png" alt="truckdetails">
+                            </div>
+                            <div class="bl_no" style="display: none;">BL-009101</div>
+                        </div>
+                        <div class="epod_dash_box">
+                            <div class="header">
+                                <div class="track_id">XY-2345-PHC</div>
+                                <div class="status">
+                                    <div class="stats"></div>
+                                    <p>Completed</p>
+                                </div>
+                            </div>
+                            <div class="truck_destination">
+                                <div class="time_details">
+                                    <span class="time">10:30:00</span>
+                                    <span class="day">-</span>
+                                </div>
+                                <div class="destination_info">
+                                    <div class="route active">Mile 3, Port Harcourt</div>
+                                    <div class="route active">GRA Phase 2, Port Harcourt</div>
+                                    <div class="route active">Rumuokoro, Port Harcourt</div>
+                                </div>
+                            </div>
+                            <div class="truck_img">
+                                <img src="img.png" alt="truckdetails">
+                            </div>
+                            <div class="bl_no" style="display: none;">BL-002345</div>
+                        </div>
+                        <div class="epod_dash_box">
+                            <div class="header">
+                                <div class="track_id">XY-6789-KAD</div>
+                                <div class="status">
+                                    <div class="stats"></div>
+                                    <p>In transit</p>
+                                </div>
+                            </div>
+                            <div class="truck_destination">
+                                <div class="time_details">
+                                    <span class="time">11:45:00</span>
+                                    <span class="day">1 hour 20 mins left</span>
+                                </div>
+                                <div class="destination_info">
+                                    <div class="route active">Unguwan Rimi, Kaduna</div>
+                                    <div class="route active">Barnawa, Kaduna</div>
+                                    <div class="route">Sabo, Kaduna</div>
+                                    <div class="route">Tudun Wada, Kaduna</div>
+                                </div>
+                            </div>
+                            <div class="truck_img">
+                                <img src="img.png" alt="truckdetails">
+                            </div>
+                            <div class="bl_no" style="display: none;">BL-006789</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="epod_details">
+                <div class="header">
+                    <div class="cancel_button" onclick="handleSideToggle()"><i class="fa fa-angle-left"></i></div>
+                    <div class="track_id">XY-9876-LAG</div>
+                    <div class="status">
+                        <span class="circle"></span>
+                        On-Route
+                    </div>
+                    <div class="call_action">
+                        <button class="call_btn"><i class="fa-solid fa-phone"></i><span class="sm-hidden">Contact</span>
+                        </button>
+                        <div class="call_dropdown">
+                            <a href="tel:+1234567890"><i class="fa-solid fa-user"></i> Call
+                                Driver
+                            </a>
+                            <a href="tel:+1987654321"><i class="fa-solid fa-headset"></i>Call
+                                Support</a>
+                            <a href="tel:+1122334455"><i class="fa-solid fa-building"></i> Call Company</a>
+                        </div>
+                    </div>
+                    <div class="chat_action">
+                        <button class="chat_btn"><i class="fa-solid fa-comments"></i><span class="sm-hidden">chat
+                                with us</span></button>
+                        <div class="chat_dropdown">
+                            <a href="sms:+1234567890"><i class="fa-solid fa-user"></i> Chat with Driver</a>
+                            <a href="sms:+1987654321"><i class="fa-solid fa-headset"></i> Chat with Support</a>
+                            <a href="sms:+1122334455"><i class="fa-solid fa-building"></i> Chat with Company</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="epod_details-nav">
+                    <div class="epod_navlinks">
+                        <button type="button" class="current" id="shipment" title="navigate to tab"
+                            class="epod_navlink">shipment
+                            Info</button>
+                        <button type="button" id="vechicle" title="navigate to tab" class="epod_navlink">Vechicle
+                            Info</button>
+                        <button type="button" id="driver" title="navigate to tab" class="epod_navlink">Driver
+                            Info</button>
+                        <button type="button" id="document" title="navigate to tab"
+                            class="epod_navlink">Documents</button>
+                        <button type="button" id="company" title="navigate to tab" class="epod_navlink">Company</button>
+                        <button type="button" id="waybill_p" title="navigate to tab"
+                            class="epod_navlink">Waybill</button>
+                    </div>
+                </div>
+                <div class="epod-tab_contents">
+                    <div id="shipment" class="tab">
+                        <div class="title">Shipment Info</div>
+                        <div class="img_box"></div>
+                        <div class="epod_route">
+                            <div class="header">
+                                <div class="title">Route</div>
+                                <div class="right">
+                                    <div class="timer">09:40:55</div>
+                                    <div class="mins_left">23mins. Left</div>
+                                </div>
+
+                            </div>
+                            <div class="map">
+                                <div class="map_details">
+                                    <div class="map_header">
+                                        <button class="cancel_button">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+
+                                        <div class="filter_list">
+                                            <div class="list">
+                                                <input type="checkbox" id="in progress">
+                                                <p>All in progress transaction</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="map_view"></div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="vechicle" class="tab">
+                        <div class="vehicle">
+                            <div class="title"><i class="fa-solid fa-truck"></i> Vehicle Info</div>
+
+                            <div class="infos">
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-hashtag"></i> Truck Number:</p>
+                                    <p>ABJRK-12345</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-weight-hanging"></i> Capacity:</p>
+                                    <p>10,000 kg</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-car-side"></i> Plate Number:</p>
+                                    <p>XY-9876-LAG</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-user"></i> Assigned Driver:</p>
+                                    <p>Adewale Ayuba</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-calendar"></i> Last Maintenance:</p>
+                                    <p>12th Feb 2025</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-gas-pump"></i> Fuel Type:</p>
+                                    <p>Diesel</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-circle-check"></i> Status:</p>
+                                    <p class="status available"><i class="fa-solid fa-check-circle"></i> Available</p>
+                                </div>
+                            </div>
+
+                            <div class="truck_images">
+                                <h3> Truck Photos</h3>
+                                <!-- Truck Image Gallery -->
+                                <div class="image_gallery">
+                                    <div class="truck_image">
+                                        <img src="img.png" alt="Truck Photo" onclick="openPreview(this, 'Truck Photo')">
+                                    </div>
+                                    <div class="truck_image">
+                                        <img src="plate.jpg" alt="License Plate"
+                                            onclick="openPreview(this, 'License Plate')">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="vehicle_feedback">
+                                <h3>Rate and Review Vehicle</h3>
+                                <p>How satisfied are you with this vehicle?</p>
+                                <div class="rating vehicle_v">
+                                    <span class="star" onclick="rateVehicle(1)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateVehicle(2)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateVehicle(3)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateVehicle(4)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateVehicle(5)"><i class="fa-light fa-star"></i></span>
+                                </div>
+                                <textarea id="vehicleComment" class="oppi" placeholder="Leave a comment..."></textarea>
+                                <button class="call_btn boopt"
+                                    onclick="submitVehicleFeedback('vehicle')">Submit</button>
+
+                            </div>
+                            <div class="reviews">
+                                <h4><i class="fa-solid fa-comments"></i> Customer Reviews</h4>
+                                <div id="vehicleReviewList">
+                                    <div class="review">
+                                        <div class="user_initials">A</div>
+                                        <div class="contents">
+                                            <div class="u_rating">
+                                                <i class="fa-solid fa-star star active"></i>
+                                                <i class="fa-solid fa-star star active"></i>
+                                                <i class="fa-solid fa-star star active"></i>
+                                                <i class="fa-solid fa-star star"></i>
+                                                <i class="fa-solid fa-star star"></i>
+                                            </div>
+                                            <div class="comment">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+                                                unde
+                                                laudantium eligendi odit, quibusdam reiciendis iste nisi non vitae neque
+                                                harum veniam possimus. Ipsa nesciunt aliquam rem soluta vitae dolores.
+                                            </div>
+                                            <div class="user_name .light">Adewale bademi</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="driver" class="tab">
+                        <div class="driver">
+                            <div class="title"><i class="fa-solid fa-user-tie"></i> Driver Info</div>
+
+                            <div class="infos">
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-id-badge"></i> Driver Name:</p>
+                                    <p>Adewale Ayuba</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-id-card"></i> Driver License Number:</p>
+                                    <p>DL-987654</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-phone"></i> Contact:</p>
+                                    <p>+234 812 345 6789</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-phone-volume"></i> Emergency Contact:</p>
+                                    <p>+234 801 234 5678 (Boluwatife - Wife)</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-location-dot"></i> Address:</p>
+                                    <p>23, Olowu Street, Lagos, Nigeria</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-truck"></i> Assigned Vehicle:</p>
+                                    <p>ABJRK-12345</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-user-check"></i> Status:</p>
+                                    <p class="status active"><i class="fa-solid fa-circle-check"></i> Active</p>
+                                </div>
+                            </div>
+
+                            <div class="driver_images">
+                                <h3 class="light">Driver Photos</h3>
+                                <div class="image_gallery">
+
+                                    <div class="driver_image">
+                                        <img src="./truck_image.jpg" alt="Adewale Ayuba" id="AdewaleAyuba"
+                                            onclick="openPreview(this,'AdewaleAyuba')">
+                                    </div>
+
+                                    <div class="driver_image">
+                                        <img src="image.png" alt="Driver ID" id="driverID"
+                                            onclick="openPreview(this,'driverID')">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="driver_feedback">
+                                <h3> Rate and review driver</h3>
+                                <div class="rating driver_r">
+
+                                    <span class="star" onclick="rateDriver(1)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateDriver(2)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateDriver(3)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateDriver(4)"><i class="fa-light fa-star"></i></span>
+                                    <span class="star" onclick="rateDriver(5)"><i class="fa-light fa-star"></i></span>
+                                </div>
+                                <textarea id="comment" class="oppi" placeholder="Leave a comment..."></textarea>
+                                <button class="call_btn boopt" onclick="submitDriverFeedback()">Submit</button>
+
+                            </div>
+
+                            <div class="reviews">
+                                <h4><i class="fa-solid fa-comments"></i> Customer Reviews</h4>
+                                <div id="reviewList">
+                                    <p>No reviews yet. Be the first to leave one!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="document" class="tab">
+                        <div class="header">
+                            <div class="title">Document</div>
+                            <div class="actions">
+                                <button onclick="downloadSelectedDocs()"><i class="fa fa-download"></i></button>
+                                <button onclick="downloadDocAsZIP()"> <i class="fa fa-file-zipper"></i> </button>
+                                <!-- <button><i class="fa fa-envelope"></i> </button> -->
+                                <button onclick="shareWaydocFile()"><i class="fa fa-share"></i> </button>
+                                <!-- <button onclick="window.print()"><i class="fa fa-print"></i> </button> -->
+                            </div>
+
+                        </div>
+                        <div class="document_list">
+                            <ul id="doc_list">
+                                <li>
+                                    <label>
+                                        <input type="checkbox" class="doc_checkbox" data-file="invoice.pdf">
+                                        <span class="doc_number">1.</span>
+                                        <span class="doc_name">Invoice</span>
+                                    </label>
+                                    <img class="thumbnail" src="pdf_icon.png" alt="PDF" data-file="invoice.pdf">
+                                    <div class="button_bt">
+                                        <button onclick="previewDocument('invoice.pdf')"><i
+                                                class="fa fa-eye"></i></button>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="checkbox" class="doc_checkbox" data-file="bill_of_lading.docx">
+                                        <span class="doc_number">2.</span>
+                                        <span class="doc_name">Bill of Lading</span>
+                                    </label>
+                                    <img class="thumbnail" src="doc.png" alt="DOCX" data-file="bill_of_lading.docx">
+                                    <div class="button_bt">
+                                        <button onclick="previewDocument('bill_of_lading.docx')"><i
+                                                class="fa fa-eye"></i></button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="checkbox" class="doc_checkbox" data-file="truck_image.jpg">
+                                        <span class="doc_number">3.</span>
+                                        <span class="doc_name">Truck Image</span>
+                                    </label>
+                                    <img class="thumbnail" src="truck_image.jpg" alt="Image"
+                                        data-file="truck_image.jpg">
+                                    <div class="button_bt">
+                                        <button onclick="previewDocument('truck_image.jpg')"><i
+                                                class="fa fa-eye"></i></button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Document Preview -->
+                        <div class="doc_img">
+                            <iframe id="pdf_preview" style="display:none; width:100%; height:400px;"></iframe>
+                            <img id="image_preview" style="display:none; width:100%; max-width:500px;">
+                            <p id="unsupported_preview" style="display:none; color:red;">Preview not supported for this
+                                file type.</p>
+                        </div>
+                    </div>
+                    <div id="company" class="tab">
+                        <div class="company">
+                            <div class="title"><i class="fa-solid fa-building"></i> Company Info</div>
+
+                            <div class="infos">
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-id-badge"></i> Company Name:</p>
+                                    <p>DAO Logistics Ltd.</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-location-dot"></i> Address:</p>
+                                    <p>12 Marina Road, Lagos, Nigeria</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-phone"></i> Contact Number:</p>
+                                    <p>+234 812 345 6789</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-envelope"></i> Email:</p>
+                                    <p>info@daologistics.com</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-globe"></i> Website:</p>
+                                    <p><a href="https://www.daologistics.com" target="_blank">www.daologistics.com</a>
+                                    </p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-calendar"></i> Established:</p>
+                                    <p>2015</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-warehouse"></i> Services:</p>
+                                    <p>Freight, Warehousing, Transportation, Customs Clearance</p>
+                                </div>
+                                <div class="info">
+                                    <p class="bold"><i class="fa-solid fa-users"></i> Employees:</p>
+                                    <p>250+</p>
+                                </div>
+                            </div>
+
+                            <div class="company_images">
+                                <h3><i class="fa-solid fa-image"></i> Company Photos</h3>
+                                <div class="image_gallery">
+                                    <div class="company_image"><img src="" alt="Company Building"></div>
+                                    <div class="company_image"><img src="" alt="Warehouse"></div>
+                                    <div class="company_image"><img src="" alt="Fleet of Trucks"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="waybill_p" class="tab">
+                        <div class="scale-container">
+                            <!-- <label for="scale">Scale:</label> -->
+                            <input type="range" id="scale" min="0.5" max="2" step="0.1" value="1"
+                                oninput="updateScale(this.value)">
+                            <div class="scale-labels">
+                                <span>0%</span>
+                                <span class="mid-label">100%</span>
+                                <span>200%</span>
+                            </div>
+                            <button class="fit_btn" type="button" onclick="scaleToFitScreen()">
+                                <i class="fa fa-expand-wide"></i> Fit to Screen</button>
+                        </div>
+                        <div class="waybill_container">
+
+
+
+                            <div class="header">
+                                <div class="logo_cont">
+                                    <div class="logo">
+                                        <img src="./logo.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="detailed_info">
+                                    <div class="mail">info@logistics.com<i class="fa fa-envelope"></i></div>
+                                    <div class="address">no 11, Orimolade Crescent, Off Adeniyi Jones, Ikeja Lagos
+                                        Nigeria <i class="fa fa-location"></i>
+                                    </div>
+                                    <div class="website">www.logistics.com<i class="fa fa-globe"></i></div>
+                                    <div class="phone">+234 803 3019 513<i class="fa fa-phone"></i></div>
+                                </div>
+                            </div>
+                            <h2 class="title2">WAYBILL <span class="waybill_num">#12345678</span></h2>
+                            <h3>DISPATCH SECTION</h3>
+                            <div class="patner_cont">
+                                <h3>Partner Information</h3>
+                                <p><span class="bold">Partner:</span> <span class="p_info">BURN STOVES NIGERIA
+                                        LIMITED</span></p>
+                                <p><span class="bold">Address:</span>
+                                    <span class="add_info">Nigeria Limited, Bala Dawakin Industrial Layout, Charo
+                                        Junction, Off Dawakin Kudu Road, Dawakin Local Government, Kano State,
+                                        Nigeria.</span> Burn
+                                </p>
+                                <p><span class="bold">Contact Person:</span>
+                                    <span class="cont_info">Jerry</span>
+                                </p>
+                                <p><span class="bold">Phone:</span>
+                                    <span class="tel_info">08138543842</span>
+                                </p>
+                            </div>
+
+
+                            <h3>Transporter Information</h3>
+                            <table>
+                                <tr>
+                                    <th>Transporter's Name</th>
+                                    <td>Not specified</td>
+                                    <th>Vehicle No.</th>
+                                    <td>006811</td>
+                                </tr>
+                            </table>
+
+                            <h3>Waybill Details</h3>
+                            <table>
+                                <tr>
+                                    <th>BL Number</th>
+                                    <td>PNG000602-240418068/AGLN0806[SHPL40620400]</td>
+                                    <th>Container No.</th>
+                                    <td>PCIU1924760</td>
+                                </tr>
+                                <tr>
+                                    <th>Container Seal No.</th>
+                                    <td>Not specified</td>
+                                    <th>Sealed (Yes/No)</th>
+                                    <td>Not specified</td>
+                                </tr>
+                                <tr>
+                                    <th>Tracker Found (Yes/No)</th>
+                                    <td>Not specified</td>
+                                    <th>Arrival Date</th>
+                                    <td>Not specified</td>
+                                </tr>
+                            </table>
+
+                            <h3>Shipment Information</h3>
+                            <table>
+                                <tr>
+                                    <th>FROM</th>
+                                    <td>Burn Nigeria Limited, Bala Dawakin Industrial Layout, Charo junction, Kano
+                                        State, Nigeria</td>
+                                    <th>TO</th>
+                                    <td>Not specified</td>
+                                </tr>
+                                <tr>
+                                    <th>DATE</th>
+                                    <td>Not specified</td>
+                                    <th>Authorization</th>
+                                    <td>Not specified</td>
+                                </tr>
+                                <tr>
+                                    <th>CONSIGNEE</th>
+                                    <td>BURN STOVES NIGERIA LIMITED</td>
+                                    <th>Truck / Trailer</th>
+                                    <td>006811</td>
+                                </tr>
+                            </table>
+
+                            <h3>Material Details</h3>
+                            <table>
+                                <tr>
+                                    <th>Material Description</th>
+                                    <th>Shipment</th>
+                                    <th>Unit Type</th>
+                                    <th>Number of Units</th>
+                                    <th>Unit Weight</th>
+                                    <th>Total QTY</th>
+                                    <th>Sound</th>
+                                    <th>Reconditioned</th>
+                                    <th>Other</th>
+                                </tr>
+                                <tr>
+                                    <td>WIRE</td>
+                                    <td>1X20FT</td>
+                                    <td>Container</td>
+                                    <td>Not specified</td>
+                                    <td>Not specified</td>
+                                    <td>Not specified</td>
+                                    <td>Not specified</td>
+                                    <td>Not specified</td>
+                                    <td>Not specified</td>
+                                </tr>
+                            </table>
+
+                            <div class="remarks">
+                                <h3>Remarks</h3>
+                                <textarea minlength="1" placeholder="remark" name="" id=""></textarea>
+                            </div>
+
+                            <h3>Driver & Dispatch Info</h3>
+                            <table>
+                                <tr>
+                                    <th>Driver’s Name</th>
+                                    <td>BABA</td>
+                                    <th>Dispatched by</th>
+                                    <td>Not specified</td>
+                                </tr>
+                                <tr>
+                                    <th>Vehicle Number</th>
+                                    <td>7078691299</td>
+                                    <th>Title</th>
+                                    <td>Not specified</td>
+                                </tr>
+                                <tr>
+                                    <th>Signature and Date</th>
+                                    <td>Not specified</td>
+                                    <th>Signature and Date</th>
+                                    <td>Not specified</td>
+                                </tr>
+                            </table>
+
+
+
+
+
+
+                            <div class="footer">
+                                <div class="fot1">
+
+
+                                </div>
+
+                                <div class="fot2">
+                                    <div class="fort_fot ">
+                                        <!-- <h3>Terms and Conditions</h3> -->
+                                        <p> <span class="bold">Phone: </span> (234) 909 9710 778, (234) 818 4792 309</p>
+                                        <p> <span class="bold">website: </span> https://libracircle.com</p>
+                                        <p> <span class="bold">Email: </span> info@libracircle.com</p>
+                                        <p class="upt"> <span class="bold">TIN: </span> 02624825-0001 | RC-32913 | VAT
+                                            IKV0600232913</p>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="stamp_p s1"></div>
+                            <div class="stamp_p s2"></div>
+                        </div>
+
+                        <div class="acts_btn">
+                            <button type="button" onclick="handleSign()" class="bt1op"> <i
+                                    class="fa-sharp fa-solid fa-pen-nib"></i>
+                                Sign</button>
+                            <button type="button" onclick="handleStamp()" class="bt2op"> <i
+                                    class="fa-sharp fa-solid fa-stamp"></i>
+                                Stamp</button>
+                        </div>
+
+                        <div class="sign_modal">
+                            <form class="sign_wrapper">
+                                <div class="sign_view"></div>
+                                <div class="op_msg">Are you sure you want to sign this document?</div>
+                                <div class="sign_opt">
+                                    <button onclick="handleSignSubmition()" type="submit">Yes</button>
+                                    <button class="no" onclick="handleCloseModal()" type="button">No</button>
+                                </div>
+                                <p class="sign_msg"></p>
+                            </form>
+
+                        </div>
+
+                        <div class="stamp_modal">
+                            <form class="stamp_wrapper">
+                                <div class="stamp_view"></div>
+                                <div class="op_msg">Are you sure you want to stamp this document?</div>
+                                <div class="stamp_opt">
+                                    <button onclick="handleStampSubmition()" type="submit">Yes</button>
+                                    <button class="no" onclick="handleCloseModal()" type="button">No</button>
+                                </div>
+                                <p class="stamp_msg"></p>
+                            </form>
+
+                        </div>
+
+                        <div class="actions_op noshowp">
+
+                            <button type="button" onclick="window.print()"> <i class="fa-solid fa-print"></i>
+                                Print</button>
+                            <div class="dropdown">
+                                <button type="button"> <i class="fa-solid fa-download"></i> Download</button>
+                                <div class="dropdown-content">
+                                    <button onclick="downloadWaybillAsPDF()">- <i class="fa fa-file"></i> Download as
+                                        PDF</button>
+                                    <button onclick="downloadWaybillAsImage()">- <i class="fa fa-image"></i> Download as
+                                        Image</button>
+                                </div>
+                            </div>
+                            <button type="button" onclick="shareWaybillAsImage()"> <i
+                                    class="fa-sharp fa-solid fa-share-from-square"></i>Share</button>
+                            <button type="button" class="collapse_action" title="collapse action"> <i
+                                    class="fa fa-angle-up"></i></button>
+                        </div>
+                    </div>
+                    <!-- Hidden File Input -->
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;"
+                        onchange="previewImage()">
+
+                    <!-- Modal for Image Preview & Editing -->
+                    <div id="imageModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h3 id="modalTitle"></h3> <!-- Show image type (Driver/Truck) -->
+                            <h4 id="fileName"></h4> <!-- Display file name -->
+                            <img id="previewImage" src="" alt="Image Preview">
+                            <button onclick="document.getElementById('imageInput').click()">Change
+                                Image</button>
+                            <button onclick="saveImage()">Save</button>
+                            <button class="media_p" onclick="downloadImage()" title="Download">
+                                <i class="fa fa-download"></i>
+                            </button>
+                            <button class="media_p" onclick="printImage()" title="Print">
+                                <i class="fa fa-print"></i>
+                            </button>
+                            <button class="media_p" onclick="shareImage()" title="Share">
+                                <i class="fa fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // document.querySelectorAll('.cpsl .epod_nav .dropdown > a').forEach(dropdown => {
+
+        //     dropdown.addEventListener('click', function (event) {
+        //         // alert('clicked 1')
+        //         event.preventDefault();
+        //         // alert('clicked 2')
+        //         document.querySelectorAll('.cpsl .epod_nav .dropdown-menu').forEach(menu => {
+        //             if (menu !== this.nextElementSibling) {
+        //                 menu.classList.remove('showlist');
+        //             }
+        //         });
+        //         // alert('clicked 3')
+        //         this.nextElementSibling.classList.toggle('showlist');
+        //         // alert('clicked 4')
+        //     });
+        // });
+
+        function searchBoxes() {
+            let input = document.getElementById("searchInput").value.toUpperCase();
+            let boxes = document.getElementsByClassName("epod_dash_box");
+
+            for (let i = 0; i < boxes.length; i++) {
+                let trackId = boxes[i].getElementsByClassName("track_id")[0].innerText.toUpperCase();
+                let blNo = boxes[i].getElementsByClassName("bl_no")[0].innerText.toUpperCase();
+
+                if (trackId.includes(input) || blNo.includes(input)) {
+                    boxes[i].style.display = "block";
+                    boxes[i].style.maxWidth = "fit-content"
+                } else {
+                    boxes[i].style.display = "none";
+                }
+            }
+        }
+
+        // Enable search on input keyup
+        document.getElementById("searchInput").addEventListener("keyup", searchBoxes);
+
+        function updateUserImage() {
+            const username = document.getElementById("username").innerHTML;
+            const firstLetter = username.charAt(0).toUpperCase();
+            const img = document.querySelector(".user_img img");
+            const userInitial = document.querySelector(".user_initial");
+
+            if (img.src === "" || img.src.endsWith("/")) {
+                img.style.display = "none";
+                userInitial.textContent = firstLetter;
+                userInitial.style.display = "flex";
+            } else {
+                img.style.display = "block";
+                userInitial.style.display = "none";
+
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateUserImage();
+        });
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filters = document.querySelectorAll(".list.filter"); // All filters
+            const epodBoxes = document.querySelectorAll(".epod_dash_box"); // All boxes
+            let activeFilter = null; // Track active filter
+
+            filters.forEach(filter => {
+                filter.addEventListener("click", function () {
+                    const selectedFilter = this.getAttribute("data-filter"); // Get filter type
+
+                    // If clicking the same active filter, reset and show all boxes
+                    if (activeFilter === selectedFilter) {
+                        filters.forEach(f => f.classList.remove("active")); // Remove active class
+                        epodBoxes.forEach(box => box.style.display = "block"); // Show all boxes
+                        activeFilter = null; // Reset active filter
+                        return;
+                    }
+
+                    // Otherwise, apply filter
+                    filters.forEach(f => f.classList.remove("active")); // Remove active class
+                    this.classList.add("active"); // Add active class to clicked filter
+                    activeFilter = selectedFilter; // Update active filter
+
+                    epodBoxes.forEach(box => {
+                        const statusText = box.querySelector(".status p").innerText.trim(); // Get box status
+
+                        let match = false;
+                        switch (selectedFilter) {
+                            case "Pending":
+                                match = statusText === "Awaiting takeoff";
+                                break;
+                            case "Completed":
+                                match = statusText === "In transit";
+                                break;
+                            case "Cancelled":
+                                match = statusText === "Arrived";
+                                break;
+                            case "In Progress":
+                                match = statusText === "Completed";
+                                break;
+                        }
+
+                        box.style.display = match ? "block" : "none"; //
+                        box.style.maxWidth = match ? "fit-content" : "auto"; //
+                        //  Show/hide based on match
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <script>
+
+
+        const handleSign = () => {
+            const signModal = document.querySelector('.sign_modal');
+            signModal.classList.add('showactb');
+
+            // Close modal when clicking outside the sign wrapper
+            signModal.addEventListener('click', function (event) {
+                if (!event.target.closest('.sign_wrapper')) {
+                    signModal.classList.remove('showactb');
+                }
+            });
+        }
+
+        const handleSignSubmition = () => {
+            const signModal = document.querySelector('.sign_modal');
+            const signWrapper = document.querySelector('.sign_wrapper');
+            const submitButton = signWrapper.querySelector('button[type="submit"]');
+            const signMsg = document.querySelector('.sign_msg')
+
+            signWrapper.addEventListener('submit', (event) => {
+                event.preventDefault();
+                submitButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Signing...';
+                signMsg.innerHTML = 'Document signed successfully!';
+                setTimeout(() => {
+                    signMsg.innerHTML = '';
+                    signModal.classList.remove('showactb');
+                    submitButton.innerHTML = 'Yes';
+                }, 2000); // Simulate a delay for signing process
+            });
+        }
+
+
+        const handleStamp = () => {
+            const StampModal = document.querySelector('.stamp_modal');
+            StampModal.classList.add('showactb');
+
+            // Close modal when clicking outside the Stamp wrapper
+            StampModal.addEventListener('click', function (event) {
+                if (!event.target.closest('.stamp_wrapper')) {
+                    StampModal.classList.remove('showactb');
+                }
+            });
+        }
+
+        const handleStampSubmition = () => {
+            const StampModal = document.querySelector('.stamp_modal');
+            const StampWrapper = document.querySelector('.stamp_wrapper');
+            const submitButton = StampWrapper.querySelector('button[type="submit"]');
+            const StampMsg = document.querySelector('.stamp_msg')
+
+            StampWrapper.addEventListener('submit', (event) => {
+                event.preventDefault();
+                submitButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Stamping...';
+                StampMsg.innerHTML = 'Document Stamped successfully!';
+                setTimeout(() => {
+                    StampMsg.innerHTML = '';
+                    StampModal.classList.remove('showactb');
+                    submitButton.innerHTML = 'Yes';
+                }, 2000); // Simulate a delay for Stamping process
+            });
+        }
+
+
+        const handleCloseModal = () => {
+            const StampModal = document.querySelector('.stamp_modal');
+            const signModal = document.querySelector('.sign_modal');
+
+            StampModal.classList.remove('showactb')
+            signModal.classList.remove('showactb')
+        }
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll(".epod_navlinks button");
+            const contents = document.querySelectorAll(".epod-tab_contents .tab");
+
+            // Set initial active tab
+            document.querySelector(".epod_navlinks .current").classList.add("active");
+            document.querySelector(".epod-tab_contents .tab").classList.add("active");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function () {
+                    // Remove 'current' class from all tabs
+                    tabs.forEach(t => t.classList.remove("current"));
+
+                    // Hide all content divs
+                    contents.forEach(content => content.classList.remove("active"));
+
+                    // Add 'current' class to the clicked tab
+                    this.classList.add("current");
+
+                    // Show corresponding content
+                    const tabId = this.id;
+                    document.querySelector(`.epod-tab_contents #${tabId}`).classList.add("active");
+                });
+            });
+        });
+
+
+        const handleSideToggle = () => {
+            const epodDetails = document.querySelector('.epod_cont main .epod_details');
+
+            document.querySelector('.epod_cont main .epod_details').classList.toggle('show')
+
+            epodDashBoxs.forEach((b) => b.classList.remove('active'));
+        }
+
+        const epodDashBoxs = document.querySelectorAll('.epod_dash_box');
+        const epodDetails = document.querySelector('.epod_cont main .epod_details');
+
+        // Remove 'active' class from all initially
+        epodDashBoxs.forEach((b) => b.classList.remove('active'));
+
+        epodDashBoxs.forEach((box) => {
+            box.addEventListener('click', () => {
+                // Remove 'active' from all boxes
+                epodDashBoxs.forEach((b) => b.classList.remove('active'));
+
+                // Add 'active' only to the clicked box
+                box.classList.add('active');
+
+                // Show epod_details
+                epodDetails.classList.add('show');
+            });
+        });
+
+
+        document.querySelector(".chat_btn").addEventListener("click", function () {
+            document.querySelector(".chat_action").classList.toggle("active");
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener("click", function (event) {
+            if (!document.querySelector(".chat_action").contains(event.target)) {
+                document.querySelector(".chat_action").classList.remove("active");
+            }
+        });
+
+
+
+        document.querySelector(".call_btn").addEventListener("click", function () {
+            // alert('me')
+            document.querySelector(".call_action").classList.toggle("active");
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener("click", function (event) {
+            if (!document.querySelector(".call_action").contains(event.target)) {
+                document.querySelector(".call_action").classList.remove("active");
+            }
+        });
+
+        document.querySelectorAll(".filter").forEach(filter => {
+            filter.addEventListener("click", function () {
+                this.classList.toggle("active");
+            });
+        });
+
+        const handleDropSearch = () => {
+            document.querySelector('.epod_cont main .epod_tracking .search_box').classList.toggle('show')
+        }
+
+        function previewDocument(fileName) {
+            let fileExtension = fileName.split('.').pop().toLowerCase();
+            let pdfPreview = document.getElementById("pdf_preview");
+            let imagePreview = document.getElementById("image_preview");
+            let unsupportedPreview = document.getElementById("unsupported_preview");
+
+            pdfPreview.style.display = "none";
+            imagePreview.style.display = "none";
+            unsupportedPreview.style.display = "none";
+
+            if (fileExtension === "pdf") {
+                pdfPreview.src = fileName;
+                pdfPreview.style.display = "block";
+            } else if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
+                imagePreview.src = fileName;
+                imagePreview.style.display = "block";
+            } else {
+                unsupportedPreview.style.display = "block";
+            }
+        }
+
+        let currentImageElement = null;
+
+        function openPreview(imgElement, title) {
+            if (imgElement.src) {
+                currentImageElement = imgElement;
+                document.getElementById("previewImage").src = imgElement.src;
+                document.getElementById("modalTitle").textContent = title; // Set modal title
+                document.getElementById("fileName").textContent = ""; // Reset file name
+                document.getElementById("imageModal").style.display = "block";
+            }
+        }
+
+        function previewImage() {
+            const fileInput = document.getElementById("imageInput");
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById("previewImage").src = e.target.result;
+                    document.getElementById("fileName").textContent = file.name; // Show file name
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveImage() {
+            if (currentImageElement) {
+                currentImageElement.src = document.getElementById("previewImage").src;
+            }
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+
+
+        function rateDriver(stars) {
+            let starElements = document.querySelectorAll('.rating.driver_r .star i'); // Select the <i> inside .star
+
+            starElements.forEach((icon, index) => {
+                if (index < stars) {
+                    icon.classList.add('active');
+                    icon.classList.replace('fa-light', 'fa-solid'); // Change to filled star
+                } else {
+                    icon.classList.remove('active');
+                    icon.classList.replace('fa-solid', 'fa-light'); // Reset to outlined star
+                }
+            });
+        }
+
+
+
+        function rateVehicle(stars) {
+            let starElements = document.querySelectorAll('.rating.vehicle_v .star i');
+            starElements.forEach((icon, index) => {
+                if (index < stars) {
+                    icon.classList.add('active');
+                    icon.classList.replace('fa-light', 'fa-solid'); // Change to filled star
+                } else {
+                    icon.classList.remove('active');
+                    icon.classList.replace('fa-solid', 'fa-light'); // Reset to outlined star
+                }
+            });
+        }
+
+        function submitDriverFeedback() {
+            let comment = document.getElementById('comment').value;
+            let rating = document.querySelectorAll('.star i.active').length;
+            if (rating === 0) {
+                alert('Please select a rating.');
+                return;
+            }
+            alert(`Feedback Submitted!\nRating: ${rating} stars\nComment: ${comment}`);
+        }
+
+        function submitVehicleFeedback() {
+            let comment = document.getElementById('comment').value;
+            let rating = document.querySelectorAll('.star i.active').length;
+            if (rating === 0) {
+                alert('Please select a rating.');
+                return;
+            }
+            alert(`Feedback Submitted!\nRating: ${rating} stars\nComment: ${comment}`);
+        }
+
+        // ---error-----------
+        document.addEventListener("DOMContentLoaded", () => {
+            const shipmentMap = document.querySelector("#shipment .map");
+            const shipmentCancel = document.querySelector(".map_header .cancel_button");
+            shipmentMap.classList.remove('shipment-d')
+            if (!shipmentMap || !shipmentCancel) return; // Exit if elements are missing
+
+            // Add class on map click
+            shipmentMap.addEventListener("click", () => shipmentMap.classList.add("shipment-d"));
+
+            // Remove class on cancel button click
+            shipmentCancel.addEventListener("click", () => {
+                console.log("Before removal:", shipmentMap.classList);
+
+                setTimeout(() => {
+                    shipmentMap.classList.remove("shipment-d");
+                    console.log("After removal:", shipmentMap.classList);
+                }, 10); // Delay slightly
+            });
+
+        });
+
+        // const collapse_w = document.querySelector('.collapse_action');
+        // const collapseIcon = document.querySelector('.collapse_action i');
+        // const actionOp = document.querySelector('.actions_op');
+
+        // collapse.addEventListener('click', () => {
+        //     actionOp.classList.toggle('noshowp')
+        //     collapseIcon.classList.toggle('rotate_p')
+        // })
+
+
+
+        function updateScale(value) {
+            document.querySelector('.waybill_container').style.transform = `scale(${value})`;
+        }
+
+        function scaleToFitScreen() {
+            const waybill = document.querySelector('.waybill_container');
+            const containerWidth = waybill.offsetWidth;
+            const containerHeight = waybill.offsetHeight;
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // Calculate scale factors
+            const scaleWidth = screenWidth / containerWidth;
+            const scaleHeight = screenHeight / containerHeight;
+
+            // Use the smallest scale to fit both width and height
+            const bestScale = Math.min(scaleWidth, scaleHeight);
+
+            // Apply scaling
+            waybill.style.transform = `scale(${bestScale})`;
+            waybill.style.transformOrigin = "top center"; // Ensures scaling happens from the top-left corner
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            scaleToFitScreen();
+        })
+
+
+
+
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"
+        integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function downloadImg() {
+            const waybill = document.querySelector('.doc_img');
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = imgData;
+                link.download = "image.png";
+                link.click();
+            });
+        }
+
+        async function shareWaydocFile() {
+            const selectedFileInput = document.querySelector('.doc_checkbox:checked');
+
+            if (!selectedFileInput) {
+                alert("No document selected for sharing.");
+                return;
+            }
+
+            let filePath = selectedFileInput.getAttribute("data-file");
+
+            try {
+                // Fetch the file as a blob
+                let response = await fetch(filePath);
+                let blob = await response.blob();
+                let fileName = filePath.split('/').pop(); // Extract file name from URL
+                let file = new File([blob], fileName, { type: blob.type });
+
+                // Check if Web Share API supports file sharing
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        title: "Shared Waybill Document",
+                        text: `Sharing document: ${fileName}`,
+                        files: [file]
+                    });
+                } else {
+                    alert("Sharing not supported on this device.");
+                }
+            } catch (error) {
+                console.error("Error sharing file:", error);
+                alert("Failed to share the document.");
+            }
+        }
+
+
+        function downloadSelectedDocs() {
+            let selectedFiles = document.querySelectorAll(".doc_checkbox:checked");
+            selectedFiles.forEach((checkbox) => {
+                let fileName = checkbox.getAttribute("data-file");
+                let link = document.createElement("a");
+                link.href = fileName;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+
+        // function downloadDocAsPDF() {
+        //     const { jsPDF } = window.jspdf;
+        //     const waybill = document.querySelector('.doc_img');
+
+        //     html2canvas(waybill, { scale: 2 }).then(canvas => {
+        //         const imgData = canvas.toDataURL("image/png");
+        //         const pdf = new jsPDF('p', 'mm', 'a4');
+        //         const imgWidth = 210;
+        //         const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        //         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        //         pdf.save("image.pdf");
+        //     });
+        // }
+
+        async function downloadDocAsZIP() {
+            let zip = new JSZip();
+            let selectedFiles = document.querySelectorAll(".doc_checkbox:checked");
+
+            if (selectedFiles.length === 0) {
+                alert("No documents selected for download.");
+                return;
+            }
+
+            let promises = [];
+            selectedFiles.forEach(checkbox => {
+                let fileName = checkbox.getAttribute("data-file");
+                let filePath = fileName; // Update this if files are in a different folder
+
+                // Fetch each file and add it to the ZIP
+                let filePromise = fetch(filePath)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        zip.file(fileName, blob);
+                    });
+
+                promises.push(filePromise);
+            });
+
+            // Wait for all files to be added before generating the ZIP
+            Promise.all(promises).then(() => {
+                zip.generateAsync({ type: "blob" }).then(content => {
+                    saveAs(content, "documents.zip");
+                });
+            });
+        }
+
+
+
+        function downloadImage() {
+            const waybill = document.querySelector('#previewImage');
+
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = imgData;
+                link.download = "name.png";
+                link.click();
+            });
+
+            // const imgSrc = document.getElementById("imageModal").dataset.imageSrc; // Get stored image src
+            // const fileName = document.getElementById("fileName").innerText;
+
+            // const link = document.createElement("a");
+            // link.href = imgSrc;
+            // link.download = fileName;
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+        }
+
+        // 
+
+        const collapse = document.querySelector('.collapse_action');
+        const collapseIcon = document.querySelector('.collapse_action i');
+        const actionOp = document.querySelector('.actions_op');
+
+        collapse.addEventListener('click', () => {
+            actionOp.classList.toggle('noshowp')
+            collapseIcon.classList.toggle('rotate_p')
+        })
+
+
+
+        async function shareImage() {
+            const waybill = document.querySelector('#previewImage');
+
+            html2canvas(waybill, { scale: 2 }).then(async (canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Convert base64 to a Blob
+                const blob = await fetch(imgData).then(res => res.blob());
+                const file = new File([blob], "name.png", { type: "image/png" });
+
+                // Check if Web Share API is available
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: "Waybill Document",
+                            text: "Here is the waybill document.",
+                            files: [file]
+                        });
+                    } catch (error) {
+                        console.error("Error sharing:", error);
+                    }
+                } else {
+                    alert("Sharing not supported on this device.");
+                }
+            });
+        }
+
+
+
+
+
+
+
+    </script>
+    <script>
+
+
+
+        function downloadWaybillAsImage() {
+            const waybill = document.querySelector('.waybill_container');
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = imgData;
+                link.download = "waybill.png";
+                link.click();
+            });
+        }
+
+        async function shareWaybillAsImage() {
+            const waybill = document.querySelector('.waybill_container');
+
+            html2canvas(waybill, { scale: 2 }).then(async (canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Convert base64 to a Blob
+                const blob = await fetch(imgData).then(res => res.blob());
+                const file = new File([blob], "waybill.png", { type: "image/png" });
+
+                // Check if Web Share API is available
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: "Waybill Document",
+                            text: "Here is the waybill document.",
+                            files: [file]
+                        });
+                    } catch (error) {
+                        console.error("Error sharing:", error);
+                    }
+                } else {
+                    alert("Sharing not supported on this device.");
+                }
+            });
+        }
+
+        function downloadWaybillAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const waybill = document.querySelector('.waybill_container');
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save("waybill.pdf");
+            });
+        }
+
+
+    </script>
+    <script src="./script.js"></script>
+</body>
+
+</html>

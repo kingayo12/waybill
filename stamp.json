@@ -1,0 +1,12 @@
+[
+  {
+    "record_id": "12345",
+    "user_id": "67890",
+    "status": "pending"
+  },
+  {
+    "record_id": "54321",
+    "user_id": "11111",
+    "status": "approved"
+  }
+]

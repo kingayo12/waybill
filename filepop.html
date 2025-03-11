@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver & Truck Info</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidepop {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .sidepop.open {
+            right: 0;
+        }
+
+        .sidepop img {
+            width: 100%;
+            height: auto;
+            /* border-radius: 10px; */
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            right: 0;
+            top: 10px;
+        }
+
+        .sidepop .driver img,
+        .sidepop .vehicle img {
+            aspect-ratio: 1/2;
+            height: 100px;
+        }
+
+        .sidepop .driver i,
+        .sidepop .vehicle i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .header {
+            display: flex;
+            position: absolute;
+            width: 100%;
+            padding: 10px 0;
+            background: #fff;
+            border-bottom: 2px solid #ccc;
+            top: 0;
+            left: 0;
+            gap: 10px;
+        }
+
+        .pop {
+            position: relative;
+        }
+
+        .imgth {
+            padding-top: 50px;
+            border-top: 4px solid #ccc;
+        }
+
+
+        /* @media print {
+            .no-print {
+                opacity: 0;
+            }
+        } */
+
+        @media print {
+            .print-area {
+                display: block;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            .sidepop {
+                width: 100%;
+                height: auto;
+                position: static;
+                box-shadow: none;
+            }
+
+            .sidepop img {
+                width: 100%;
+                height: auto;
+            }
+
+            .header {
+                position: static;
+                width: 100%;
+                border-bottom: none;
+            }
+
+            .driver_feedback,
+            .vehicle_feedback {
+                display: none;
+            }
+
+            .reviews {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn" onclick="openSidepop()">View Driver & Truck Info</button>
+    <div id="sidepop" class="sidepop">
+        <div class="pop">
+            <!-- <h2>Driver Information</h2> -->
+            <div class="header no-print">
+                <div class="call_action">
+                    <button class="call_btn"><i class="fa-solid fa-phone"></i><span class="sm-hidden">Contact</span>
+                    </button>
+                    <div class="call_dropdown">
+                        <a href="tel:+1234567890"><i class="fa-solid fa-user"></i> Call
+                            Driver
+                        </a>
+                        <a href="tel:+1987654321"><i class="fa-solid fa-headset"></i>Call
+                            Support</a>
+                        <a href="tel:+1122334455"><i class="fa-solid fa-building"></i> Call Company</a>
+                    </div>
+                </div>
+                <div class="chat_action">
+                    <button class="chat_btn"><i class="fa-solid fa-comments"></i><span class="sm-hidden">chat
+                            with us</span></button>
+                    <div class="chat_dropdown">
+                        <a href="sms:+1234567890"><i class="fa-solid fa-user"></i> Chat with Driver</a>
+                        <a href="sms:+1987654321"><i class="fa-solid fa-headset"></i> Chat with Support</a>
+                        <a href="sms:+1122334455"><i class="fa-solid fa-building"></i> Chat with Company</a>
+                    </div>
+                </div>
+                <button class="media_p" onclick="downloadpg()" title="Download">
+                    <i class="fa fa-download"></i>
+                </button>
+                <button class="media_p" onclick="print()" title="Print">
+                    <i class="fa fa-print"></i>
+                </button>
+                <button class="media_p" onclick="sharepg()" title="Share">
+                    <i class="fa fa-share-alt"></i>
+                </button>
+                <span class="close-btn" onclick="closeSidepop()">&times;</span>
+
+            </div>
+            <img class="imgth" src="dt.jpg" alt="Driver">
+            <div class="driver">
+                <div class="title"><i class="fa-solid fa-user-tie"></i> Driver Info</div>
+
+                <div class="infos">
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-id-badge"></i> Driver Name:</p>
+                        <p>Adewale Ayuba</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-id-card"></i> Driver License Number:</p>
+                        <p>DL-987654</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-phone"></i> Contact:</p>
+                        <p>+234 812 345 6789</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-phone-volume"></i> Emergency Contact:</p>
+                        <p>+234 801 234 5678 Wife</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-location-dot"></i> Address:</p>
+                        <p>23, Olowu Street, Lagos, Nigeria</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-truck"></i> Assigned Vehicle:</p>
+                        <p>ABJRK-12345</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-user-check"></i> Status:</p>
+                        <p class="status active"><i class="fa-solid fa-circle-check"></i> Active</p>
+                    </div>
+                </div>
+
+                <div class="driver_images">
+                    <h3 class="light">Driver Photos</h3>
+                    <div class="image_gallery">
+
+                        <div class="driver_image">
+                            <img src="./truck_image.jpg" alt="Adewale Ayuba" id="AdewaleAyuba"
+                                onclick="openPreview(this,'AdewaleAyuba')">
+                        </div>
+
+                        <div class="driver_image">
+                            <img src="image.png" alt="Driver ID" id="driverID" onclick="openPreview(this,'driverID')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="driver_feedback no-print">
+                    <!-- <h3> Rate and review driver</h3> -->
+                    <div class="rating driver_r">
+
+                        <span class="star" onclick="rateDriver(1)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateDriver(2)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateDriver(3)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateDriver(4)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateDriver(5)"><i class="fa-light fa-star"></i></span>
+                    </div>
+                    <textarea id="comment" class="oppi" placeholder="Leave a comment..."></textarea>
+                    <button class="call_btn boopt" onclick="submitDriverFeedback()">Submit</button>
+
+                </div>
+
+                <div class="reviews">
+                    <h4><i class="fa-solid fa-comments"></i> Customer Reviews</h4>
+                    <div id="reviewList">
+                        <p>No reviews yet. Be the first to leave one!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <h2>Truck Information</h2> -->
+            <img class="imgth" src="tt.jpg" alt="Truck">
+            <div class="vehicle">
+                <div class="title"><i class="fa-solid fa-truck"></i> Vehicle Info</div>
+
+                <div class="infos">
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-hashtag"></i> Truck Number:</p>
+                        <p>ABJRK-12345</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-weight-hanging"></i> Capacity:</p>
+                        <p>10,000 kg</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-car-side"></i> Plate Number:</p>
+                        <p>XY-9876-LAG</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-user"></i> Assigned Driver:</p>
+                        <p>Adewale Ayuba</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-calendar"></i> Last Maintenance:</p>
+                        <p>12th Feb 2025</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-gas-pump"></i> Fuel Type:</p>
+                        <p>Diesel</p>
+                    </div>
+                    <div class="info">
+                        <p class="bold"><i class="fa-solid fa-circle-check"></i> Status:</p>
+                        <p class="status available"><i class="fa-solid fa-check-circle"></i> Available</p>
+                    </div>
+                </div>
+
+                <div class="truck_images">
+                    <h3> Truck Photos</h3>
+                    <!-- Truck Image Gallery -->
+                    <div class="image_gallery">
+                        <div class="truck_image">
+                            <img src="img.png" alt="Truck Photo" onclick="openPreview(this, 'Truck Photo')">
+                        </div>
+                        <div class="truck_image">
+                            <img src="plate.jpg" alt="License Plate" onclick="openPreview(this, 'License Plate')">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="vehicle_feedback no-print">
+                    <h3>Rate and Review Vehicle</h3>
+                    <p>How satisfied are you with this vehicle?</p>
+                    <div class="rating vehicle_v">
+                        <span class="star" onclick="rateVehicle(1)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateVehicle(2)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateVehicle(3)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateVehicle(4)"><i class="fa-light fa-star"></i></span>
+                        <span class="star" onclick="rateVehicle(5)"><i class="fa-light fa-star"></i></span>
+                    </div>
+                    <textarea id="vehicleComment" class="oppi" placeholder="Leave a comment..."></textarea>
+                    <button class="call_btn boopt" onclick="submitVehicleFeedback('vehicle')">Submit</button>
+
+                </div>
+                <div class="reviews">
+                    <h4><i class="fa-solid fa-comments"></i> Customer Reviews</h4>
+                    <div id="vehicleReviewList">
+                        <div class="review">
+                            <div class="user_initials">A</div>
+                            <div class="contents">
+                                <div class="u_rating">
+                                    <i class="fa-solid fa-star star active"></i>
+                                    <i class="fa-solid fa-star star active"></i>
+                                    <i class="fa-solid fa-star star active"></i>
+                                    <i class="fa-solid fa-star star"></i>
+                                    <i class="fa-solid fa-star star"></i>
+                                </div>
+                                <div class="comment">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+                                    unde
+                                    laudantium eligendi odit, quibusdam reiciendis iste nisi non vitae neque
+                                    harum veniam possimus. Ipsa nesciunt aliquam rem soluta vitae dolores.
+                                </div>
+                                <div class="user_name .light">Adewale bademi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage()">
+
+        <!-- Modal for Image Preview & Editing -->
+        <div id="imageModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalTitle"></h3> <!-- Show image type (Driver/Truck) -->
+                <h4 id="fileName"></h4> <!-- Display file name -->
+                <img id="previewImage" src="" alt="Image Preview">
+                <button onclick="document.getElementById('imageInput').click()">Change
+                    Image</button>
+                <button onclick="saveImage()">Save</button>
+                <button class="media_p" onclick="downloadImage()" title="Download">
+                    <i class="fa fa-download"></i>
+                </button>
+                <button class="media_p" onclick="printImage()" title="Print">
+                    <i class="fa fa-print"></i>
+                </button>
+                <button class="media_p" onclick="shareImage()" title="Share">
+                    <i class="fa fa-share-alt"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openSidepop() {
+            document.getElementById("sidepop").classList.add("open");
+        }
+
+        function closeSidepop() {
+            document.getElementById("sidepop").classList.remove("open");
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabs = document.querySelectorAll(".epod_navlinks button");
+            const contents = document.querySelectorAll(".epod-tab_contents .tab");
+
+            // Set initial active tab
+            document.querySelector(".epod_navlinks .current").classList.add("active");
+            document.querySelector(".epod-tab_contents .tab").classList.add("active");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function () {
+                    // Remove 'current' class from all tabs
+                    tabs.forEach(t => t.classList.remove("current"));
+
+                    // Hide all content divs
+                    contents.forEach(content => content.classList.remove("active"));
+
+                    // Add 'current' class to the clicked tab
+                    this.classList.add("current");
+
+                    // Show corresponding content
+                    const tabId = this.id;
+                    document.querySelector(`.epod-tab_contents #${tabId}`).classList.add("active");
+                });
+            });
+        });
+
+
+        const handleSideToggle = () => {
+            const epodDetails = document.querySelector('.epod_cont main .epod_details');
+
+            document.querySelector('.epod_cont main .epod_details').classList.toggle('show')
+
+            epodDashBoxs.forEach((b) => b.classList.remove('active'));
+        }
+
+        const epodDashBoxs = document.querySelectorAll('.epod_dash_box');
+        const epodDetails = document.querySelector('.epod_cont main .epod_details');
+
+        // Remove 'active' class from all initially
+        epodDashBoxs.forEach((b) => b.classList.remove('active'));
+
+        epodDashBoxs.forEach((box) => {
+            box.addEventListener('click', () => {
+                // Remove 'active' from all boxes
+                epodDashBoxs.forEach((b) => b.classList.remove('active'));
+
+                // Add 'active' only to the clicked box
+                box.classList.add('active');
+
+                // Show epod_details
+                epodDetails.classList.add('show');
+            });
+        });
+
+
+        document.querySelector(".chat_btn").addEventListener("click", function () {
+            document.querySelector(".chat_action").classList.toggle("active");
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener("click", function (event) {
+            if (!document.querySelector(".chat_action").contains(event.target)) {
+                document.querySelector(".chat_action").classList.remove("active");
+            }
+        });
+
+
+
+        document.querySelector(".call_btn").addEventListener("click", function () {
+            // alert('me')
+            document.querySelector(".call_action").classList.toggle("active");
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener("click", function (event) {
+            if (!document.querySelector(".call_action").contains(event.target)) {
+                document.querySelector(".call_action").classList.remove("active");
+            }
+        });
+
+        document.querySelectorAll(".filter").forEach(filter => {
+            filter.addEventListener("click", function () {
+                this.classList.toggle("active");
+            });
+        });
+
+        const handleDropSearch = () => {
+            document.querySelector('.epod_cont main .epod_tracking .search_box').classList.toggle('show')
+        }
+
+        function previewDocument(fileName) {
+            let fileExtension = fileName.split('.').pop().toLowerCase();
+            let pdfPreview = document.getElementById("pdf_preview");
+            let imagePreview = document.getElementById("image_preview");
+            let unsupportedPreview = document.getElementById("unsupported_preview");
+
+            pdfPreview.style.display = "none";
+            imagePreview.style.display = "none";
+            unsupportedPreview.style.display = "none";
+
+            if (fileExtension === "pdf") {
+                pdfPreview.src = fileName;
+                pdfPreview.style.display = "block";
+            } else if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
+                imagePreview.src = fileName;
+                imagePreview.style.display = "block";
+            } else {
+                unsupportedPreview.style.display = "block";
+            }
+        }
+
+        let currentImageElement = null;
+
+        function openPreview(imgElement, title) {
+            if (imgElement.src) {
+                currentImageElement = imgElement;
+                document.getElementById("previewImage").src = imgElement.src;
+                document.getElementById("modalTitle").textContent = title; // Set modal title
+                document.getElementById("fileName").textContent = ""; // Reset file name
+                document.getElementById("imageModal").style.display = "block";
+            }
+        }
+
+        function previewImage() {
+            const fileInput = document.getElementById("imageInput");
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById("previewImage").src = e.target.result;
+                    document.getElementById("fileName").textContent = file.name; // Show file name
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveImage() {
+            if (currentImageElement) {
+                currentImageElement.src = document.getElementById("previewImage").src;
+            }
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+
+
+        function rateDriver(stars) {
+            let starElements = document.querySelectorAll('.rating.driver_r .star i'); // Select the <i> inside .star
+
+            starElements.forEach((icon, index) => {
+                if (index < stars) {
+                    icon.classList.add('active');
+                    icon.classList.replace('fa-light', 'fa-solid'); // Change to filled star
+                } else {
+                    icon.classList.remove('active');
+                    icon.classList.replace('fa-solid', 'fa-light'); // Reset to outlined star
+                }
+            });
+        }
+
+
+
+        function rateVehicle(stars) {
+            let starElements = document.querySelectorAll('.rating.vehicle_v .star i');
+            starElements.forEach((icon, index) => {
+                if (index < stars) {
+                    icon.classList.add('active');
+                    icon.classList.replace('fa-light', 'fa-solid'); // Change to filled star
+                } else {
+                    icon.classList.remove('active');
+                    icon.classList.replace('fa-solid', 'fa-light'); // Reset to outlined star
+                }
+            });
+        }
+
+        function submitDriverFeedback() {
+            let comment = document.getElementById('comment').value;
+            let rating = document.querySelectorAll('.star i.active').length;
+            if (rating === 0) {
+                alert('Please select a rating.');
+                return;
+            }
+            alert(`Feedback Submitted!\nRating: ${rating} stars\nComment: ${comment}`);
+        }
+
+        function submitVehicleFeedback() {
+            let comment = document.getElementById('comment').value;
+            let rating = document.querySelectorAll('.star i.active').length;
+            if (rating === 0) {
+                alert('Please select a rating.');
+                return;
+            }
+            alert(`Feedback Submitted!\nRating: ${rating} stars\nComment: ${comment}`);
+        }
+
+
+        function downloadpg() {
+            const waybill = document.querySelector('.pop');
+            waybill.style.padding = '10px'
+
+            // Temporarily show elements with class 'no-print' for the screenshot
+            const noPrintElements = document.querySelectorAll('.no-print');
+            noPrintElements.forEach(el => el.style.display = 'flex');
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = imgData;
+                link.download = "image.png";
+                link.click();
+
+                // Hide elements with class 'no-print' again after the screenshot
+                noPrintElements.forEach(el => el.style.display = 'none');
+            });
+        }
+
+
+        async function sharepg() {
+            const waybill = document.querySelector('.pop');
+            waybill.style.padding = '10px'
+
+            const noPrintElements = document.querySelectorAll('.no-print');
+            noPrintElements.forEach(el => el.style.display = 'flex');
+
+            html2canvas(waybill, { scale: 2 }).then(async (canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Convert base64 to a Blob
+                const blob = await fetch(imgData).then(res => res.blob());
+                const file = new File([blob], "waybill.png", { type: "image/png" });
+                noPrintElements.forEach(el => el.style.display = 'none');
+                // Check if Web Share API is available
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: "Waybill Document",
+                            text: "Here is the waybill document.",
+                            files: [file]
+                        });
+                    } catch (error) {
+                        console.error("Error sharing:", error);
+                    }
+                } else {
+                    alert("Sharing not supported on this device.");
+                }
+            });
+        }
+
+
+
+    </script>
+</body>
+
+</html>

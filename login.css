@@ -1,0 +1,242 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.login_container {
+  display: flex;
+  width: 100%;
+  /* max-width: 900px; */
+  background: url(./11806949_4835729.jpg);
+  background-size: cover;
+  background-blend-mode: overlay;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 100dvh;
+}
+
+.login {
+  display: flex;
+  width: 100%;
+}
+
+.right {
+  flex: 0.5;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.video_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(2, 13, 176, 0.566);
+  z-index: 2;
+}
+
+.video video {
+  width: 100%;
+  height: 100dvh;
+  object-fit: cover;
+}
+
+.left {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url(./abstract-elegant-blue-background-with-text-space.jpg) #ffffffeb;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+}
+.form {
+  max-width: 400px;
+  background: rgb(255, 255, 255);
+  width: 100%;
+  padding: 20px;
+  border-radius: 3px;
+}
+.form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.login-options button {
+  flex: 1;
+  /* padding: 10px; */
+  background: transparent !important;
+  color: #747474 !important;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0 !important;
+}
+
+.login-options button.active {
+  /* background: #007bff; */
+  color: rgb(0, 0, 195) !important;
+  border-bottom: 2px solid blue;
+}
+
+.form label {
+  display: block;
+  margin-top: 20px;
+  font-size: 12px !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  transition: all 400ms ease-in-out;
+}
+
+.form_control {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  width: 100%;
+  position: relative;
+  font-size: 12px !important;
+
+  /* background: pink; */
+}
+
+.form_control i {
+  position: absolute;
+  left: 0;
+  padding: 12px 10px;
+  color: #707070;
+  /* background: #fff; */
+  margin-top: 0.5px;
+}
+
+.user_err,
+.psw_err,
+.acc_err {
+  font-size: 12px;
+  padding: 4px;
+  color: rgb(253, 147, 147);
+  display: none;
+}
+
+.form input {
+  max-width: 100%;
+  width: 100%;
+  padding: 10px 0px 10px 0;
+  border-style: none;
+  border-bottom: 1px solid #ccc;
+  /* border-radius: 5px; */
+  margin: 0;
+  outline: none;
+  text-indent: 40px;
+  font-size: 12px !important;
+}
+
+.form input:hover,
+.form input:focus {
+  background: rgba(0, 0, 255, 0.02);
+  border-bottom: 1px solid blue;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background: rgb(1, 1, 203);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.form button:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 765px) {
+  .left {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: blur(0);
+    z-index: 99;
+  }
+
+  .right {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex: none;
+  }
+
+  .video_overlay {
+    background: #ffffffd1;
+  }
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+.logo img {
+  width: 70%;
+}
+
+.remember_me {
+  display: flex;
+  width: 100%;
+  /* background: pink; */
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  font-size: 12px;
+  padding: 12px 0;
+  margin-top: 10px;
+}
+
+.form input[type="checkbox"] {
+  width: fit-content;
+  accent-color: blue;
+  transform: scale(1.3);
+}
+
+.right .logo {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  opacity: 0.5;
+}

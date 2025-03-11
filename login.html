@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="login_container">
+        <div class="login">
+            <div class="right">
+                <div class="video">
+                    <video src="vid.mp4" autoplay loop muted></video>
+                    <div class="video_overlay"></div>
+                    <div class="logo">
+                        <img src="lo.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="left">
+                <div class="form">
+                    <div class="logo">
+                        <img src="1440x208 logo.png" alt="">
+                    </div>
+                    <!-- <h2>Login</h2> -->
+                    <div class="login-options">
+                        <button id="loginWithPassword" class="active">Username & Password</button>
+                        <button id="loginWithCode">Access Code</button>
+                    </div>
+
+                    <!-- Username & Password Login -->
+                    <form id="passwordLoginForm">
+                        <label for="username">Username</label>
+                        <div class="form_control">
+                            <input type="text" id="username" placeholder="Enter your username">
+                            <i class="fa fa-user"></i>
+                            <div class="user_err"></div>
+                        </div>
+
+                        <label for="password">Password</label>
+                        <div class="form_control">
+                            <input type="password" id="password" placeholder="Enter your password">
+                            <i class="fa fa-lock"></i>
+                            <div class="psw_err"></div>
+                        </div>
+
+                        <div class="remember_me">
+                            <input type="checkbox" id="rememberMe">
+                            <span for="rememberMe">Remember Me</span>
+                        </div>
+
+
+
+
+
+                        <button type="submit">Login</button>
+                    </form>
+
+                    <!-- Access Code Login -->
+                    <form id="codeLoginForm" style="display: none;">
+                        <label for="accessCode">8-Digit Access Code</label>
+
+                        <div class="form_control">
+                            <input type="text" id="accessCode" placeholder="Enter your access code" maxlength="10">
+                            <i class="fa fa-key"></i>
+                            <div class="acc_err"></div>
+                        </div>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginWithPassword = document.getElementById("loginWithPassword");
+            const loginWithCode = document.getElementById("loginWithCode");
+            const passwordLoginForm = document.getElementById("passwordLoginForm");
+            const codeLoginForm = document.getElementById("codeLoginForm");
+
+            loginWithPassword.addEventListener("click", function () {
+                passwordLoginForm.style.display = "block";
+                codeLoginForm.style.display = "none";
+                loginWithPassword.classList.add("active");
+                loginWithCode.classList.remove("active");
+            });
+
+            loginWithCode.addEventListener("click", function () {
+                passwordLoginForm.style.display = "none";
+                codeLoginForm.style.display = "block";
+                loginWithCode.classList.add("active");
+                loginWithPassword.classList.remove("active");
+            });
+
+            function showLoading(button) {
+                button.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Logging in...`;
+                button.disabled = true;
+            }
+
+            function resetButton(button, text) {
+                setTimeout(() => {
+                    button.innerHTML = text;
+                    button.disabled = false;
+                }, 2000); // Reset after 2 seconds (simulating a request)
+            }
+
+            // Username & Password Validation
+            passwordLoginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const username = document.getElementById("username");
+                const password = document.getElementById("password");
+                const userErr = document.querySelector(".user_err");
+                const pswErr = document.querySelector(".psw_err");
+                const loginButton = this.querySelector("button");
+
+                let valid = true;
+
+                // if (username.value.trim().length < 3) {
+                //     userErr.style.display = "block";
+                //     userErr.textContent = "Invalid Username.";
+                //     valid = false;
+                // } else {
+                //     userErr.style.display = "none";
+                // }
+
+                // // if (password.value.length < 6 || !/\d/.test(password.value) || !/[!@#$%^&*]/.test(password.value)) {
+                // if (password.value.length < 3) {
+                //     pswErr.textContent = "Invalid Password.";
+                //     pswErr.style.display = "block";
+                //     valid = false;
+                // } else {
+                //     pswErr.style.display = "none";
+                // }
+
+                if (username.value.trim() !== "admin@gmail.com") {
+                    userErr.style.display = "block";
+                    userErr.textContent = "Invalid Username.";
+                    valid = false;
+                } else {
+                    userErr.style.display = "none";
+                }
+
+                // Check if password is "1234567"
+                if (password.value !== "12345678") {
+                    pswErr.textContent = "Invalid Password.";
+                    pswErr.style.display = "block";
+                    valid = false;
+                } else {
+                    pswErr.style.display = "none";
+                }
+
+
+                if (valid) {
+                    showLoading(loginButton);
+                    setTimeout(() => {
+                        // alert("Logging in with Username & Password...");
+                        // this.submit();
+                        window.location.href = "/dashboard.html";// Simulate form submission
+                    }, 2000);
+                } else {
+                    resetButton(loginButton, "Login");
+                }
+            });
+
+            // Access Code Validation
+            document.getElementById("codeLoginForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const accessCode = document.getElementById("accessCode");
+                const accErr = document.querySelector(".acc_err");
+                const loginButton = this.querySelector("button");
+
+                // Validate Access Code (must be exactly 8 digits)
+                if (/^\d{8}$/.test(accessCode.value)) {
+                    accErr.style.display = "none"; // Hide error message if valid
+                    showLoading(loginButton);
+
+                    setTimeout(() => {
+                        // alert("Logging in with Access Code...");
+                        this.submit(); // Simulate form submission
+                    }, 2000);
+                } else {
+                    accErr.textContent = "Access code must be at least 8 characters long.";
+                    accErr.style.display = "block"; // Ensure error message is visible
+                    resetButton(loginButton, "Login");
+                }
+            });
+
+            // Prevent non-numeric input for access code
+            document.getElementById("accessCode").addEventListener("input", function () {
+                // this.value = this.value.replace(/\D/g, ""); // Removes any non-numeric characters
+
+                // Hide error message when user starts correcting input
+                const accErr = document.querySelector(".acc_err");
+                if (accErr && this.value.length > 8) {
+                    accErr.style.display = "none";
+                }
+            });
+
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginWithPassword = document.getElementById("loginWithPassword");
+            const loginWithCode = document.getElementById("loginWithCode");
+            const passwordLoginForm = document.getElementById("passwordLoginForm");
+            const codeLoginForm = document.getElementById("codeLoginForm");
+
+            // Function to set the active login method
+            function setActiveLogin(method) {
+                localStorage.setItem("activeLoginMethod", method);
+                if (method === "password") {
+                    passwordLoginForm.style.display = "block";
+                    codeLoginForm.style.display = "none";
+                    loginWithPassword.classList.add("active");
+                    loginWithCode.classList.remove("active");
+                } else {
+                    passwordLoginForm.style.display = "none";
+                    codeLoginForm.style.display = "block";
+                    loginWithCode.classList.add("active");
+                    loginWithPassword.classList.remove("active");
+                }
+            }
+
+            // Load the last active method from localStorage
+            const savedMethod = localStorage.getItem("activeLoginMethod");
+            if (savedMethod) {
+                setActiveLogin(savedMethod);
+            } else {
+                setActiveLogin("password"); // Default to password login
+            }
+
+            // Event listeners to toggle login method
+            loginWithPassword.addEventListener("click", function () {
+                setActiveLogin("password");
+            });
+
+            loginWithCode.addEventListener("click", function () {
+                setActiveLogin("code");
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const usernameInput = document.getElementById("username");
+            const passwordInput = document.getElementById("password");
+            const rememberMeCheckbox = document.getElementById("rememberMe");
+
+            // Load saved credentials if they exist
+            if (localStorage.getItem("rememberedUser")) {
+                const savedData = JSON.parse(localStorage.getItem("rememberedUser"));
+                usernameInput.value = savedData.username;
+                passwordInput.value = savedData.password;
+                rememberMeCheckbox.checked = true; // Check the box if credentials exist
+            }
+
+            // Handle form submission
+            document.getElementById("passwordLoginForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (username && password) {
+                    if (rememberMeCheckbox.checked) {
+                        localStorage.setItem("rememberedUser", JSON.stringify({ username, password }));
+                    } else {
+                        localStorage.removeItem("rememberedUser");
+                    }
+                    // alert("Logging in...");
+                    // this.submit(); // Simulate login
+                } else {
+                    // alert("Please enter valid credentials.");
+                }
+            });
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
