@@ -1374,8 +1374,13 @@
 
                             const updateStampDate = () => {
                                 const dateText = selectedStampArea.querySelector(".stamp1 .stampdate");
+                                const now = new Date();
+
                                 if (dateText) {
-                                    dateText.textContent = new Date().toLocaleDateString("en-GB").replace(/\//g, "-");
+                                    const dateString = now.toLocaleDateString("en-GB").replace(/\//g, "-");
+                                    const hours = now.getHours().toString().padStart(2, '0');
+                                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                                    dateText.textContent = `${dateString} ${hours}:${minutes}`;
                                 }
                             };
                             updateStampDate();
