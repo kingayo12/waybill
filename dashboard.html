@@ -115,18 +115,19 @@
                 <div class="filter_lists">
                     <div class="header small">filter</div>
                     <div class="filter_list">
-                        <div class="list filter" data-filter="Pending">
-                            <div class="toggle_switch">
-                                <span class="filter_text">Awaiting takeoff</span>
-                                <div class="toggle_ball"></div>
-                            </div>
-                        </div>
                         <div class="list filter" data-filter="en route">
                             <div class="toggle_switch">
                                 <span class="filter_text">en route</span>
                                 <div class="toggle_ball"></div>
                             </div>
                         </div>
+                        <div class="list filter" data-filter="Pending">
+                            <div class="toggle_switch">
+                                <span class="filter_text">Awaiting takeoff</span>
+                                <div class="toggle_ball"></div>
+                            </div>
+                        </div>
+
                         <div class="list filter" data-filter="Completed">
                             <div class="toggle_switch">
                                 <span class="filter_text">In transit</span>
@@ -655,7 +656,7 @@
                                 <div class="header">
                                     <div class="logo_cont">
                                         <div class="logo">
-                                            <img src="./logo.png" alt="">
+                                            <img src="./ing.png" alt="">
                                         </div>
                                     </div>
                                     <div class="detailed_info">
@@ -741,6 +742,11 @@
                                         <th>Truck / Trailer</th>
                                         <td>006811</td>
                                     </tr>
+                                    <tr>
+                                        <th>CLIENT REF</th>
+                                        <td>xxx112</td>
+
+                                    </tr>
                                 </table>
 
                                 <h3>Material Details</h3>
@@ -769,10 +775,7 @@
                                     </tr>
                                 </table>
 
-                                <div class="remarks">
-                                    <h3>Remarks</h3>
-                                    <textarea minlength="1" placeholder="remark" name="" id=""></textarea>
-                                </div>
+
 
                                 <h3>Driver & Dispatch Info</h3>
                                 <table>
@@ -1378,7 +1381,7 @@
                             updateStampDate();
 
 
-
+                            selectedStampArea.classList.add("no-border");
                             // Show success message
                             document.querySelector(".stamp_msg").textContent = "Document stamped successfully!";
                             document.querySelector(".stamp_msg").style.color = "green";

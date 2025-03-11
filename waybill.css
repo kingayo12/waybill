@@ -85,7 +85,7 @@
 }
 
 .cpsl .waybill_container .header .logo {
-  width: 100px;
+  width: 260px;
 }
 
 .cpsl .waybill_container .header .logo img {
@@ -362,6 +362,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cpsl .stamp_p.no-border {
+  border: none;
 }
 
 .cpsl .stamp_p .stampSVG {
