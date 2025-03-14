@@ -724,6 +724,12 @@
                                 <h3>Shipment Information</h3>
                                 <table>
                                     <tr>
+                                        <th>CLIENT REF</th>
+                                        <td>xxx112</td>
+                                        <th>CONSIGNEE</th>
+                                        <td>BURN STOVES NIGERIA LIMITED</td>
+                                    </tr>
+                                    <tr>
                                         <th>FROM</th>
                                         <td>Burn Nigeria Limited, Bala Dawakin Industrial Layout, Charo junction, Kano
                                             State, Nigeria</td>
@@ -737,16 +743,11 @@
                                         <td>Not specified</td>
                                     </tr>
                                     <tr>
-                                        <th>CONSIGNEE</th>
-                                        <td>BURN STOVES NIGERIA LIMITED</td>
+
                                         <th>Truck / Trailer</th>
                                         <td>006811</td>
                                     </tr>
-                                    <tr>
-                                        <th>CLIENT REF</th>
-                                        <td>xxx112</td>
 
-                                    </tr>
                                 </table>
 
                                 <h3>Material Details</h3>
@@ -1180,7 +1181,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             let selectedStampArea = null; // Track the clicked area for signing/stamping
-
+            const stampedAreas = new Map();
             // Select all stamp areas
             const stampAreas = document.querySelectorAll(".stamp_p");
             const signButton = document.querySelector(".bt1op");
@@ -1198,6 +1199,7 @@
             // Activate buttons when a stamp area is clicked
             stampAreas.forEach(area => {
                 area.addEventListener("click", function () {
+                    if (area.classList.contains("invalidstamp")) return false
                     removeActiveStyles();
                     selectedStampArea = area; // Store the clicked area
                     area.classList.add("active-sign-stamp");
@@ -1205,6 +1207,36 @@
                     stampButton.disabled = false;
                 });
             });
+
+            const handleAction = (type) => {
+                if (selectedStampArea) {
+                    const sign = selectedStampArea.querySelector(".sign1");
+                    const stamp = selectedStampArea.querySelector(".stamp1");
+
+                    if (type === "signed") sign.classList.add("done");
+                    if (type === "stamped") stamp.classList.add("done");
+
+                    if (sign.classList.contains("done") || stamp.classList.contains("done")) {
+                        signButton.disabled = true;
+                        stampButton.disabled = true;
+                    }
+
+
+
+                    // Check if both are done
+                    if (sign.classList.contains("done") && stamp.classList.contains("done")) {
+                        selectedStampArea.classList.add("invalidstamp");
+                        signButton.disabled = true;
+                        stampButton.disabled = true;
+                    }
+                }
+            };
+
+            stampButton.addEventListener("click", () => handleAction("stamped"));
+            signButton.addEventListener("click", () => handleAction("signed"));
+
+
+
 
             // Handle opening Stamp Modal
             stampButton.addEventListener("click", function () {
@@ -1412,97 +1444,31 @@
 
 
 
-        // ----------------------stamp starts----------------
 
-        // const handleStamp = () => {
-        //     const StampModal = document.querySelector('.stamp_modal');
-        //     StampModal.classList.add('showactb');
+        document.querySelectorAll(".sign1, .stamp1").forEach(element => {
+            element.addEventListener("mouseenter", function () {
+                let deleteBtn = document.createElement("button");
+                deleteBtn.innerHTML = `<i class='fa fa-trash'></i>`;
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.onclick = function () {
+                    element.classList.remove("done");
+                    element.parentElement.classList.remove("invalidstamp");
+                    signButton.disabled = false;
+                    stampButton.disabled = false;
+                    deleteBtn.remove();
+                };
+                element.appendChild(deleteBtn);
+            });
 
-        //     // Close modal when clicking outside the stamp wrapper
-        //     StampModal.addEventListener('click', function (event) {
-        //         if (!event.target.closest('.stamp_wrapper')) {
-        //             StampModal.classList.remove('showactb');
-        //         }
-        //     });
-        // };
-
-        // // Handle form submission with AJAX
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     const stampForm = document.getElementById("stampForm");
-
-        //     stampForm.addEventListener("submit", function (e) {
-        //         e.preventDefault();
-
-        //         // Load the JSON file
-        //         fetch("stamp.json")
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 let recordId = document.querySelector("input[name='record_id']").value;
-        //                 let userId = document.querySelector("input[name='user_id']").value;
-
-        //                 let record = data.find(item => item.record_id === recordId && item.user_id === userId);
-
-        //                 if (record) {
-        //                     record.status = "stamped"; // Update status
-
-        //                     // Simulate saving back to JSON (You'd need a backend to persist it)
-        //                     console.log("Updated record:", record);
-
-        //                     // Show stamp on UI
-        //                     const stampContainer = document.querySelector(".stamp_p.s1");
-        //                     stampContainer.innerHTML = `
-        //                 <object id="stampSVG" type="image/svg+xml" data="stamp1.svg" width="300" height="200"></object>
-        //             `;
-
-        //                     document.querySelector(".stamp_msg").textContent = "Document stamped successfully!";
-        //                     document.querySelector(".stamp_msg").style.color = "green";
-
-        //                     // Wait for the SVG to load before updating the date
-        //                     const stampSVG = document.getElementById("stampSVG");
-        //                     stampSVG.addEventListener("load", function () {
-        //                         const svgDoc = stampSVG.contentDocument;
-        //                         const dateText = svgDoc.querySelector("#dateText");
-        //                         if (dateText) {
-        //                             dateText.textContent = new Date().toLocaleDateString("en-GB"); // Format: DD-MM-YYYY
-        //                         }
-        //                     });
-
-        //                     // Scroll to the stamp smoothly
-        //                     stampContainer.scrollIntoView({ behavior: "smooth", block: "center" });
-
-        //                     // Close modal after successful stamping
-        //                     setTimeout(() => {
-        //                         document.querySelector('.stamp_modal').classList.remove('showactb');
-        //                     }, 1000);
-
-        //                 } else {
-        //                     document.querySelector(".stamp_msg").textContent = "Record not found.";
-        //                     document.querySelector(".stamp_msg").style.color = "red";
-        //                 }
-        //             })
-        //             .catch(() => {
-        //                 document.querySelector(".stamp_msg").textContent = "Error loading data.";
-        //                 document.querySelector(".stamp_msg").style.color = "red";
-        //             });
-        //     });
-        // });
-
-        // document.getElementById("stampSVG").addEventListener("load", function () {
-        //     const svgDoc = this.contentDocument;
-        //     const dateText = svgDoc.querySelector("#dateText");
-
-        //     if (dateText) {
-        //         dateText.textContent = new Date().toLocaleDateString();
-        //     }
-        // });
+            element.addEventListener("mouseleave", function () {
+                let deleteBtn = element.querySelector(".delete-btn");
+                if (deleteBtn) deleteBtn.remove();
+            });
+        });
 
 
 
-        // const handleCloseModal = () => {
-        //     document.querySelector(".stamp_modal").classList.remove("showactb");
-        // };
 
-        // -------------------------stamp  ends ------------------------------
 
         const handleStampSubmition = () => {
             const StampModal = document.querySelector('.stamp_modal');

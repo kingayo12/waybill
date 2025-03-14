@@ -789,3 +789,16 @@
 .stamp_modal small {
   text-align: center !important;
 }
+
+.delete-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background: rgb(0, 0, 255);
+  right: -10px;
+  top: 0;
+  position: absolute;
+  border-style: none;
+  color: #fff;
+  cursor: pointer;
+}
