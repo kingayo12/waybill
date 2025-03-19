@@ -776,6 +776,18 @@
                                     </tr>
                                 </table>
 
+                                <div class="remarks">
+                                    <div class="trigger_remark"><i class="fa fa-comment"></i></div>
+                                    <div class="popup_remark">
+                                        <label><input type="radio" name="remark" value="Very Good"> Very Good</label>
+                                        <label><input type="radio" name="remark" value="Good"> Good</label>
+                                        <label><input type="radio" name="remark" value="Not Good"> Not Good</label>
+                                    </div>
+                                    <h3>Remarks</h3>
+                                    <textarea placeholder="remark" id="remarkv" readonly></textarea>
+                                </div>
+
+
 
 
                                 <h3>Driver & Dispatch Info</h3>
@@ -931,6 +943,31 @@
         </main>
 
     </div>
+    <script>
+        const trigger = document.querySelector('.trigger_remark');
+        const popup = document.querySelector('.popup_remark');
+        const textarea = document.querySelector('#remarkv');
+
+        // Toggle pop-up
+        trigger.addEventListener('click', () => {
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Hide popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!trigger.contains(event.target) && !popup.contains(event.target)) {
+                popup.style.display = 'none';
+            }
+        });
+
+        // Update textarea when a remark is selected
+        document.querySelectorAll('.popup_remark input').forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                textarea.value = event.target.value;
+                popup.style.display = 'none';
+            });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/share-this.js"
         integrity="sha512-YQH3AWzoNd5UBgAzelMJ0L74JzsE1RfD7zrTDfveB5Xm5j9PBCU+Q2tD4RavX2iVVAt4iJ/gi1mSRCbX/X55pw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
