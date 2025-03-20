@@ -411,6 +411,19 @@
   justify-content: center;
 }
 
+.cpsl .stamp_p .title {
+  position: absolute;
+  top: -15px;
+  font-size: 10px;
+  text-decoration: underline;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.address {
+  text-transform: capitalize;
+}
+
 .cpsl .stamp_p.no-border {
   border: none;
 }
