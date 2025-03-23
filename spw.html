@@ -1,0 +1,767 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.0.0/dist/panzoom.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/share-this.min.css"
+        integrity="sha512-D2vagE/4+QTyP2FukMZNoZxcO1Uqcd0SsnqczdOm+zu35XDsFDIroYXxDD0WrYbyPFKD1vUmhxaCC3kR8WBNZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./waybill.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="cpsl">
+        <div id="waybill_p">
+
+            <!-- <div class="scale-container">
+                <button type="button" onclick="handleSign()" class="bt1op" title="Sign"> <i
+                        class="fa-sharp fa-solid fa-pen-nib"></i>
+                </button>
+                <button type="button" onclick="handleStamp()" class="bt2op" title="Stamp"> <i
+                        class="fa-sharp fa-solid fa-stamp"></i>
+                </button>
+                <button onclick="panzoom.zoomIn()" title="Zoom In"> <i class="fa fa-plus"></i> </button>
+                <button onclick="panzoom.zoomOut()" title="Zoom Out">
+                    <div class="fa fa-minus" title="Reset Zoom"></div>
+                </button>
+                <button onclick="panzoom.reset()"><i class="fa fa-refresh"></i></button>
+            </div> -->
+            <!-- <div id="zoom-container"> -->
+            <div class="waybill_container">
+
+
+
+                <div class="header">
+                    <div class="logo_cont">
+                        <div class="logo">
+                            <img src="./ing.png" alt="">
+                        </div>
+                    </div>
+                    <div class="detailed_info">
+                        <div class="mail">info@libracircle.com<i class="fa fa-envelope"></i></div>
+                        <div class="address">no 11, Orimolade Crescent, Off Adeniyi Jones, Ikeja Lagos
+                            Nigeria <i class="fa fa-location"></i>
+                        </div>
+                        <div class="website">https://libracircle.com<i class="fa fa-globe"></i></div>
+                        <div class="phone">(234) 909 9710 778, (234) 818 4792 309<i class="fa fa-phone"></i></div>
+                    </div>
+                </div>
+                <h2 class="title2">WAYBILL <span class="waybill_num">FMCG/2024/0001</span></h2>
+                <h3>DISPATCH SECTION</h3>
+                <div class="patner_cont">
+                    <h3>Consignee's Name & Address</h3>
+                    <p><span class="bold">Client:</span> <span class="p_info">MOZUK MEDIEQUIP & COMMODITIES
+                            SOLUTIONS LIMITED</span></p>
+                    <p><span class="bold">Address:</span>
+                        <span class="add_info">Gecko Warehouse, Arepo, Arepo B/Stop, off
+                            Lagos Ibadan Expressway.</span>
+                    </p>
+                </div>
+
+                <div class="consignee_logo">
+                    <img src="./ing.png" alt="">
+                </div>
+
+                <h3>Transporter Information</h3>
+                <table>
+                    <tr>
+                        <th>Transporter's Name</th>
+                        <td>Libra Circle</td>
+                        <th>Freight Forwarder</th>
+                        <td>Not specified</td>
+                    </tr>
+                    <tr>
+                        <th>Reference</th>
+                        <td>Not specified</td>
+                        <th>POD no</th>
+                        <td>2025-001</td>
+                    </tr>
+                </table>
+
+                <h3>Waybill Details</h3>
+                <table>
+                    <tr>
+                        <th>BL Number</th>
+                        <td>PNG000602-240418068/AGLN0806[SHPL40620400]</td>
+                        <th>Container No.</th>
+                        <td>PCIU1924760</td>
+                    </tr>
+                    <tr>
+                        <th>Container Seal No.</th>
+                        <td>Not specified</td>
+                        <th>Sealed (Yes/No)</th>
+                        <td>Not specified</td>
+                    </tr>
+                    <tr>
+                        <th>Tracker Found (Yes/No)</th>
+                        <td>Not specified</td>
+                        <th>Arrival Date</th>
+                        <td>Not specified</td>
+                    </tr>
+                </table>
+
+                <h3>Shipment Information</h3>
+                <table>
+                    <tr>
+                        <th>CLIENT REF</th>
+                        <td>xxx112</td>
+                        <th>CONSIGNEE</th>
+                        <td>BURN STOVES NIGERIA LIMITED</td>
+                    </tr>
+                    <tr>
+                        <th>FROM</th>
+                        <td>Burn Nigeria Limited, Bala Dawakin Industrial Layout, Charo junction, Kano
+                            State, Nigeria</td>
+                        <th>TO</th>
+                        <td>Not specified</td>
+                    </tr>
+                    <tr>
+                        <th>Loaded Date</th>
+                        <td>Not specified</td>
+                        <th>Final Destination</th>
+                        <td>Not specified</td>
+                    </tr>
+
+                    <tr>
+                        <th>Offloading Date</th>
+                        <td>Not specified</td>
+                    </tr>
+
+                </table>
+
+                <h3>Goods Details</h3>
+                <table>
+                    <tr>
+                        <th>Goods Description</th>
+                        <th>Goods Size & <br /> Seal No (Origin)</th>
+                        <th>Unit Type</th>
+                        <th>QTY Recieved<br /> (Origin)</th>
+                        <th>QTY Recieved<br /> (Dest.)</th>
+                        <th>Difference<br /> (Origin - Destination)</th>
+                    </tr>
+                    <tr>
+                        <td>WIRE</td>
+                        <td>1X20FT</td>
+                        <td>Container</td>
+                        <td>Not specified</td>
+                        <td>Not specified</td>
+                        <td>Not specified</td>
+
+                    </tr>
+                </table>
+
+                <div class="remarks">
+                    <div class="trigger_remark"><i class="fa fa-comment"></i></div>
+                    <div class="popup_remark">
+                        <label><input type="radio" name="remark" value="Very Good"> Very Good</label>
+                        <label><input type="radio" name="remark" value="Good"> Good</label>
+                        <label><input type="radio" name="remark" value="Not Good"> Not Good</label>
+                    </div>
+                    <h3>Remarks</h3>
+                    <textarea placeholder="remark" id="remarkv" readonly></textarea>
+                </div>
+
+
+
+
+                <h3>Driver & Dispatch Info</h3>
+                <table>
+                    <tr>
+                        <th>Driver’s Name</th>
+                        <td>BABA</td>
+                        <th>Dispatched by</th>
+                        <td>Not specified</td>
+                    </tr>
+                    <tr>
+                        <th>truck/vechicle no.</th>
+                        <td>Not specified</td>
+                        <th>Title</th>
+                        <td>Not specified</td>
+                    </tr>
+                    <tr>
+
+                        <th>Phone Number</th>
+                        <td>7078691299</td>
+                        <!-- <th>Final Destination</th>
+                            <td>Not specified</td> -->
+                    </tr>
+                    <!-- <tr>
+                            <th>Signature and Date</th>
+                            <td>Not specified</td>
+                            <th>Signature and Date</th>
+                            <td>Not specified</td>
+                        </tr> -->
+                </table>
+
+
+
+
+
+
+                <div class="footer">
+                    <div class="fot1">
+
+
+                    </div>
+
+                    <div class="fot2">
+                        <div class="fort_fot ">
+                            <!-- <h3>Terms and Conditions</h3> -->
+                            <p> <span class="bold">Phone: </span> (234) 909 9710 778, (234) 818 4792 309
+                            </p>
+                            <p> <span class="bold">website: </span> https://libracircle.com</p>
+                            <p> <span class="bold">Email: </span> info@libracircle.com</p>
+                            <p class="upt"> <span class="bold">TIN: </span> 02624825-0001 | RC-32913 |
+                                VAT
+                                IKV0600232913</p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="stamp_p s1" onclick="activateStamp(this)">
+                    <div class="title">Reciever Info (for loading)</div>
+                    <div class="sign1"></div>
+                    <div class="stamp1"></div>
+                </div>
+                <div class="stamp_p s2" onclick="activateStamp(this)">
+                    <div class="title">Local Agent Info (for loading)</div>
+                    <div class="sign1"></div>
+                    <div class="stamp1"></div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="acts_btn">
+                <button type="button" onclick="handleSign()" class="bt1op"> <i
+                    class="fa-sharp fa-solid fa-pen-nib"></i>
+                Sign</button>
+            <button type="button" onclick="handleStamp()" class="bt2op"> <i
+                    class="fa-sharp fa-solid fa-stamp"></i>
+                Stamp</button>
+            </div> -->
+
+            <!-- <div class="sign_modal">
+                <form class="sign_wrapper">
+                    <div class="sign_view"></div>
+                    <div class="op_msg">Are you sure you want to sign this document?</div>
+
+                    <div class="sign_opt">
+                        <button onclick="handleSignSubmition()" type="submit">Yes</button>
+                        <button class="no" onclick="handleCloseModal()" type="button">No</button>
+                    </div>
+                    <p class="sign_msg"></p>
+                </form>
+
+            </div> -->
+
+            <!-- <div class="stamp_modal">
+                <form class="stamp_wrapper" id="stampForm" action="">
+                    <input type="hidden" name="record_id" value="12345"> 
+                    <input type="hidden" name="user_id" value="67890">
+
+                    <div class="stamp_view">
+                        <img src="./stamp1.svg" alt="" id="stampImage">
+                    </div>
+                    <div class="op_msg">Are you sure you want to stamp this document?</div>
+                    <small class="notexs"> <span>Note:</span> Time stamp is based on server time and not
+                        your device time</small>
+                    <div class="stamp_opt">
+                        <button type="submit">Yes</button>
+                        <button class="no" type="button" onclick="handleCloseModal()">No</button>
+                    </div>
+                    <p class="stamp_msg"></p>
+                </form>
+            </div> -->
+
+            <!-- <div class="actions_op noshowp">
+                <div class="dropdown">
+                    <button type="button"> <i class="fa-solid fa-download"></i> Download</button>
+                    <div class="dropdown-content">
+                        <button onclick="downloadWaybillAsPDF()"><i class="fa fa-file"></i> As
+                            PDF</button>
+                        <button onclick="downloadWaybillAsImage()"><i class="fa fa-image"></i> As
+                            Image</button>
+                    </div>
+                </div>
+                <button type="button" onclick="shareWaybillAsImage()"> <i
+                        class="fa-sharp fa-solid fa-share-from-square"></i>Share</button>
+                <button type="button" class="collapse_action" title="collapse action"> <i
+                        class="fa fa-angle-up"></i></button>
+            </div> -->
+        </div>
+    </div>
+
+
+
+
+    <script>
+        const waybill = document.getElementById('waybill');
+        const zoomContainer = document.getElementById('zoom-container');
+
+        // Initialize Panzoom
+        const panzoom = Panzoom(waybill, {
+            maxScale: 2,
+            minScale: 0.5,
+            contain: 'outside'
+        });
+
+        window.addEventListener('load', () => {
+            const containerWidth = waybillContainer.clientWidth;
+            const containerHeight = waybillContainer.clientHeight;
+            const waybillWidth = waybill.naturalWidth || waybill.clientWidth; // Ensure correct width
+            const waybillHeight = waybill.naturalHeight || waybill.clientHeight;
+
+            // Calculate the best scale to fit the waybill fully inside the container
+            const scaleX = containerWidth / waybillWidth;
+            const scaleY = containerHeight / waybillHeight;
+            const initialScale = Math.min(scaleX, scaleY); // Ensures full visibility
+
+            // Apply the calculated scale
+            panzoom.zoom(initialScale, { animate: true });
+
+            // Optionally, center the waybill
+            panzoom.pan(0, 0, { animate: true });
+        });
+
+        // Enable zoom with the mouse wheel
+        waybillContainer.addEventListener('wheel', panzoom.zoomWithWheel);
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let selectedStampArea = null; // Track the clicked area for signing/stamping
+            const stampedAreas = new Map();
+            // Select all stamp areas
+            const stampAreas = document.querySelectorAll(".stamp_p");
+            const signButton = document.querySelector(".bt1op");
+            const stampButton = document.querySelector(".bt2op");
+
+            // Initially disable buttons
+            signButton.disabled = true;
+            stampButton.disabled = true;
+
+            const removeActiveStyles = () => {
+                stampAreas.forEach(area => area.classList.remove("active-sign-stamp"));
+            };
+
+
+            // Activate buttons when a stamp area is clicked
+            stampAreas.forEach(area => {
+                area.addEventListener("click", function () {
+                    if (area.classList.contains("invalidstamp")) return false
+                    removeActiveStyles();
+                    selectedStampArea = area; // Store the clicked area
+                    area.classList.add("active-sign-stamp");
+                    signButton.disabled = false;
+                    stampButton.disabled = false;
+                });
+            });
+
+            const handleAction = (type) => {
+                if (selectedStampArea) {
+                    const sign = selectedStampArea.querySelector(".sign1");
+                    const stamp = selectedStampArea.querySelector(".stamp1");
+
+                    if (type === "signed") sign.classList.add("done");
+                    if (type === "stamped") stamp.classList.add("done");
+
+                    if (sign.classList.contains("done") || stamp.classList.contains("done")) {
+                        signButton.disabled = true;
+                        stampButton.disabled = true;
+                    }
+
+
+
+                    // Check if both are done
+                    if (sign.classList.contains("done") && stamp.classList.contains("done")) {
+                        selectedStampArea.classList.add("invalidstamp");
+                        signButton.disabled = true;
+                        stampButton.disabled = true;
+                    }
+                }
+            };
+
+            stampButton.addEventListener("click", () => handleAction("stamped"));
+            signButton.addEventListener("click", () => handleAction("signed"));
+
+
+
+
+            // Handle opening Stamp Modal
+            stampButton.addEventListener("click", function () {
+                if (selectedStampArea) {
+                    document.querySelector(".stamp_modal").classList.add("showactb");
+                }
+            });
+
+            // Handle opening Sign Modal
+            signButton.addEventListener("click", function () {
+                if (selectedStampArea) {
+                    document.querySelector(".sign_modal").classList.add("showactb");
+                }
+            });
+
+            // Close Modals when clicking outside
+            document.querySelectorAll(".no").forEach(button => {
+                button.addEventListener("click", function () {
+                    document.querySelector(".stamp_modal").classList.remove("showactb");
+                    document.querySelector(".sign_modal").classList.remove("showactb");
+                });
+            });
+
+            // Handle Signing (No Page Refresh)
+            document.querySelector(".sign_wrapper").addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (!selectedStampArea) return;
+
+                const signElement = selectedStampArea.querySelector(".sign1");
+                signElement.innerHTML = "Administrator"; // Use actual signer name
+                signElement.style.fontFamily = "'Pacifico', cursive";
+                signElement.style.color = "blue";
+                signElement.style.fontSize = "14px";
+
+                // Show success message
+                document.querySelector(".sign_msg").textContent = "Document signed successfully!";
+                document.querySelector(".sign_msg").style.color = "green";
+
+                // Hide modal after signing
+                setTimeout(() => {
+                    document.querySelector(".sign_modal").classList.remove("showactb");
+                    document.querySelector(".sign_msg").textContent = "";
+                }, 1500);
+            });
+
+            // Handle Stamping (No Page Refresh)
+            document.querySelector("#stampForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                if (!selectedStampArea) return;
+
+                // Load JSON Data
+                fetch("stamp.json")
+                    .then(response => response.json())
+                    .then(data => {
+                        let recordId = document.querySelector("input[name='record_id']").value;
+                        let userId = document.querySelector("input[name='user_id']").value;
+                        let record = data.find(item => item.record_id === recordId && item.user_id === userId);
+
+                        if (record) {
+                            record.status = "stamped"; // Update status
+
+                            console.log("Updated record:", record);
+
+                            // Add stamp to the selected area
+                            const stampElement = selectedStampArea.querySelector(".stamp1");
+                            const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      :root {
+        --csl-color: #003399;
+        --csl-line-color: #003399;
+        --csl-text-color: #000000;
+      }
+      .outer-circle {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+      }
+      .inner-circle {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+      }
+      .inner-circle1 {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 1;
+      }
+      .text-main {
+        font-family: Arial, sans-serif;
+        font-size: 40px;
+        font-weight: bold;
+        fill: var(--csl-text-color);
+        text-anchor: middle;
+      }
+      .text-secondary {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        fill: var(--csl-text-color);
+        text-anchor: middle;
+        text-transform: uppercase;
+      }
+      .dotted-line {
+        fill: none;
+        stroke: var(--csl-color);
+        stroke-width: 2;
+        stroke-dasharray: 5 5;
+      }
+      .stampdate {
+        text-anchor: middle;
+        font-size: 20px;
+        font-weight: bold;
+        fill: var(--csl-text-color);
+      }
+      .lines {
+        stroke: var(--csl-line-color);
+        stroke-width: 1;
+      }
+      .dot {
+        fill: transparent;
+        stroke: var(--csl-color);
+      }
+    </style>
+    <path id="topTextPath" d="M 45,128 A 123,91 0 0,1 255,128" />
+    <path id="bottomTextPath" d="M 45,182 A 113,70 0 0,0 255,182" />
+  </defs>
+  <g>
+    <!-- Outer circle -->
+    <ellipse cx="150" cy="150" rx="140" ry="100" class="outer-circle" />
+    <!-- Inner circles -->
+    <ellipse cx="150" cy="150" rx="125" ry="85" class="inner-circle" />
+    <ellipse cx="150" cy="150" rx="138" ry="98" class="inner-circle1" />
+    <!-- Center text -->
+    <text x="150" y="145" class="text-main">PAID</text>
+    <!-- Curved upper text -->
+    <text class="text-secondary">
+      <textPath href="#topTextPath" startOffset="50%">CODESPRO STAMP</textPath>
+    </text>
+    <!-- Curved lower text -->
+    <text class="text-secondary">
+      <textPath href="#bottomTextPath" startOffset="50%">CODESPRO STAMP</textPath>
+    </text>
+    <!-- Horizontal lines -->
+    <line class="lines" x1="60" y1="150" x2="240" y2="150" />
+    <line class="lines" x1="80" y1="180" x2="220" y2="180" />
+    <!-- Date -->
+    <text class="stampdate" x="150" y="170" id="dateText">18-04-2024</text>
+    <!-- Dots inside the inner circle -->
+    <circle cx="40" cy="150" r="4" class="dot csl_stamp_color" />
+    <circle cx="40" cy="150" r="2.5" class="dot csl_stamp_color" />
+    <circle cx="41" cy="140" r="3.5" class="dot csl_stamp_color" />
+    <circle cx="41" cy="160" r="3.5" class="dot csl_stamp_color" />
+    
+
+
+    <circle cx="260" cy="150" r="4" class="dot csl_stamp_color" />
+   
+    <circle cx="260" cy="150" r="2.5" class="dot csl_stamp_color" />
+    <circle cx="259" cy="139" r="3.5" class="dot csl_stamp_color" />
+
+    <circle cx="260" cy="160" r="3.5" class="dot csl_stamp_color" />
+ 
+  </g>
+</svg>
+`;
+                            stampElement.innerHTML = svgContent;
+
+                            const updateStampDate = () => {
+                                const dateText = selectedStampArea.querySelector(".stamp1 .stampdate");
+                                const now = new Date();
+
+                                if (dateText) {
+                                    const dateString = now.toLocaleDateString("en-GB").replace(/\//g, "-");
+                                    const hours = now.getHours().toString().padStart(2, '0');
+                                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                                    dateText.textContent = `${dateString} ${hours}:${minutes}`;
+                                }
+                            };
+                            updateStampDate();
+
+
+                            selectedStampArea.classList.add("no-border");
+                            // Show success message
+                            document.querySelector(".stamp_msg").textContent = "Document stamped successfully!";
+                            document.querySelector(".stamp_msg").style.color = "green";
+
+                            // Hide modal after stamping
+                            setTimeout(() => {
+                                document.querySelector(".stamp_modal").classList.remove("showactb");
+                                document.querySelector(".stamp_msg").textContent = "";
+                            }, 1500);
+
+                        } else {
+                            document.querySelector(".stamp_msg").textContent = "Record not found.";
+                            document.querySelector(".stamp_msg").style.color = "red";
+                        }
+                    })
+                    .catch(() => {
+                        document.querySelector(".stamp_msg").textContent = "Error loading data.";
+                        document.querySelector(".stamp_msg").style.color = "red";
+                    });
+            });
+        });
+
+
+
+
+
+        document.querySelectorAll(".sign1, .stamp1").forEach(element => {
+            element.addEventListener("mouseenter", function () {
+                let deleteBtn = document.createElement("button");
+                deleteBtn.innerHTML = `<i class='fa fa-trash'></i>`;
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.onclick = function () {
+                    element.classList.remove("done");
+                    element.parentElement.classList.remove("invalidstamp");
+                    signButton.disabled = false;
+                    stampButton.disabled = false;
+                    deleteBtn.remove();
+                };
+                element.appendChild(deleteBtn);
+            });
+
+            element.addEventListener("mouseleave", function () {
+                let deleteBtn = element.querySelector(".delete-btn");
+                if (deleteBtn) deleteBtn.remove();
+            });
+        });
+
+
+
+
+
+        const handleStampSubmition = () => {
+            const StampModal = document.querySelector('.stamp_modal');
+            const StampWrapper = document.querySelector('.stamp_wrapper');
+            const submitButton = StampWrapper.querySelector('button[type="submit"]');
+            const StampMsg = document.querySelector('.stamp_msg')
+
+            StampWrapper.addEventListener('submit', (event) => {
+                event.preventDefault();
+                submitButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Stamping...';
+                StampMsg.innerHTML = 'Document Stamped successfully!';
+                setTimeout(() => {
+                    StampMsg.innerHTML = '';
+                    StampModal.classList.remove('showactb');
+                    submitButton.innerHTML = 'Yes';
+                }, 2000); // Simulate a delay for Stamping process
+            });
+        }
+
+
+        const handleCloseModal = () => {
+            const StampModal = document.querySelector('.stamp_modal');
+            const signModal = document.querySelector('.sign_modal');
+
+            StampModal.classList.remove('showactb')
+            signModal.classList.remove('showactb')
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"
+        integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/sharers/email.min.js"
+        integrity="sha512-4+h27jVJhdlqWwk0hvKQX2Ow5TYcyRWaYwj5hhDem63JbmslVJHqJu29zQN/ZRM/Dbg4qi9nbbx6wRwmf/S2Yw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/sharers/facebook.min.js"
+        integrity="sha512-Wh1ZDYa/KLkn2iK8a0D4FoZSqXbw1bRFCPjVs490MpcMFs1zHtMQMpqBVAqheGpRFLcGEMy/jnFmFx+6rbGJzw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/sharers/linked-in.min.js"
+        integrity="sha512-nTV0Ogc/rLbqPZXBz+2ivICqVU7ZGjMjJCzP2S/Tdgolqb2eVc+PBLQ9D+l9WpxJz7POEeRxSOMWXdmGrSbIlQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/sharers/twitter.min.js"
+        integrity="sha512-p0d6Rkeb1XLqCBlKVz7aF+UQNu4tGmAxT5NjJPYasGU8KmXvL8iEd8j/cvuJbqYK3HnVJqmf4ulWZvLx+2a4Fw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Function to convert all SVGs inside the document to PNG
+
+        // Function to capture and download the waybill as an image
+        const downloadWaybillAsImage = () => {
+            const waybill = document.querySelector(".waybill_container");
+
+            if (!waybill) {
+                console.error("Waybill container not found!");
+                return;
+            }
+
+            // Convert SVGs first, then take screenshot
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = imgData;
+                link.download = "wabill.png";
+                link.click();
+            });
+            // Delay ensures SVGs are replaced before capture
+        };
+
+
+        async function shareWaybillAsImage() {
+            const waybill = document.querySelector('.waybill_container');
+
+            html2canvas(waybill, { scale: 2 }).then(async (canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Convert base64 to a Blob
+                const blob = await fetch(imgData).then(res => res.blob());
+                const file = new File([blob], "waybill.png", { type: "image/png" });
+
+                // Check if Web Share API is available
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: "Waybill Document",
+                            text: "Here is the waybill document.",
+                            files: [file]
+                        });
+                    } catch (error) {
+                        console.error("Error sharing:", error);
+                    }
+                } else {
+                    alert("Sharing not supported on this device.");
+                }
+            });
+        }
+
+
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Link copied to clipboard. Please paste it into your social media post.');
+        }
+
+        function downloadWaybillAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const waybill = document.querySelector('.waybill_container');
+
+            html2canvas(waybill, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save("waybill.pdf");
+            });
+        }
+
+
+    </script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

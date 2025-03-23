@@ -862,3 +862,19 @@
   color: #fff;
   cursor: pointer;
 }
+
+.consignee_logo {
+  width: 200px;
+  height: auto;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  margin-top: -80px;
+}
+
+.consignee_logo img {
+  width: 100%;
+}
