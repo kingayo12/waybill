@@ -153,7 +153,11 @@
                 </div>
                 <div class="epod_content">
                     <div class="map_t"></div>
-                    <div class="epod_boxes">
+                    <button id="convertToTable">
+                        <i class="fa fa-table"></i>
+                        Table
+                    </button>
+                    <div class="epod_boxes" id="dataContainer">
                         <div class="epod_dash_box">
                             <div class="header">
                                 <div class="track_id">XY-1234-LAG</div>
@@ -165,7 +169,7 @@
                             <div class="truck_destination">
                                 <div class="time_details">
                                     <span class="time">06:15:00</span>
-                                    <span class="day">30 mins left</span>
+                                    <span class="day">3 days left</span>
                                 </div>
                                 <div class="destination_info">
                                     <div class="route active">Ojodu Berger, Lagos</div>
@@ -189,7 +193,7 @@
                             <div class="truck_destination">
                                 <div class="time_details">
                                     <span class="time">08:45:00</span>
-                                    <span class="day">2 mins left</span>
+                                    <span class="day">0 days left</span>
                                 </div>
                                 <div class="destination_info">
                                     <div class="route active">Garki, Abuja</div>
@@ -214,7 +218,7 @@
                             <div class="truck_destination">
                                 <div class="time_details">
                                     <span class="time">09:10:00</span>
-                                    <span class="day">1 hour left</span>
+                                    <span class="day">Pending</span>
                                 </div>
                                 <div class="destination_info">
                                     <div class="route">Sabon Gari, Kano</div>
@@ -238,7 +242,7 @@
                             <div class="truck_destination">
                                 <div class="time_details">
                                     <span class="time">10:30:00</span>
-                                    <span class="day">-</span>
+                                    <span class="day">0 days left</span>
                                 </div>
                                 <div class="destination_info">
                                     <div class="route active">Mile 3, Port Harcourt</div>
@@ -262,7 +266,7 @@
                             <div class="truck_destination">
                                 <div class="time_details">
                                     <span class="time">11:45:00</span>
-                                    <span class="day">1 hour 20 mins left</span>
+                                    <span class="day">2 days left</span>
                                 </div>
                                 <div class="destination_info">
                                     <div class="route active">Unguwan Rimi, Kaduna</div>
@@ -977,6 +981,221 @@
         integrity="sha512-YQH3AWzoNd5UBgAzelMJ0L74JzsE1RfD7zrTDfveB5Xm5j9PBCU+Q2tD4RavX2iVVAt4iJ/gi1mSRCbX/X55pw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const dataContainer = document.getElementById('dataContainer');
+            const convertButton = document.getElementById('convertToTable');
+            const epodDetails = document.querySelector('.epod_cont main .epod_details');
+
+            let epodDashBoxs = document.querySelectorAll('.epod_dash_box'); // Capture boxes initially
+            let originalHTML = dataContainer.innerHTML; // Store original layout
+
+            // Handle side toggling
+            const handleSideToggle = () => {
+                epodDetails.classList.toggle('show');
+                epodDashBoxs.forEach((b) => b.classList.remove('active'));
+            };
+
+            // Attach event listeners for epodDashBoxs
+            function attachBoxEventListeners() {
+                epodDashBoxs = document.querySelectorAll('.epod_dash_box'); // Refresh box list
+
+                epodDashBoxs.forEach((b) => b.classList.remove('active')); // Remove active initially
+
+                epodDashBoxs.forEach((box) => {
+                    box.addEventListener('click', () => {
+                        epodDashBoxs.forEach((b) => b.classList.remove('active'));
+                        box.classList.add('active');
+                        epodDetails.classList.add('show');
+                    });
+                });
+            }
+
+            // Attach event listeners for tabs
+            function attachTabEventListeners() {
+                const tabs = document.querySelectorAll(".epod_navlinks button");
+                const contents = document.querySelectorAll(".epod-tab_contents .tab");
+
+                tabs.forEach(tab => {
+                    tab.addEventListener("click", function () {
+                        tabs.forEach(t => t.classList.remove("current"));
+                        contents.forEach(content => content.classList.remove("active"));
+
+                        this.classList.add("current");
+
+                        const tabId = this.id;
+                        document.querySelector(`.epod-tab_contents #${tabId}`)?.classList.add("active");
+                    });
+                });
+            }
+
+            convertButton.addEventListener('click', function () {
+                dataContainer.classList.toggle('table-view');
+
+                if (dataContainer.classList.contains('table-view')) {
+                    let tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Track ID</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Day</th>
+                            <th>Destination</th>
+                            <th>BL No.</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+                    const dashBoxes = dataContainer.querySelectorAll('.epod_dash_box');
+                    dashBoxes.forEach(box => {
+                        const trackId = box.querySelector('.track_id')?.textContent || '';
+                        const statusText = box.querySelector('.status p')?.textContent || '';
+                        const time = box.querySelector('.time')?.textContent || '';
+                        const day = box.querySelector('.day')?.textContent || '';
+                        const destinations = Array.from(box.querySelectorAll('.route')).map(route => route.textContent).join(', ') || '';
+                        const blNo = box.querySelector('.bl_no')?.textContent || '';
+                        const statusClass = 'status-' + statusText.replace(/ /g, '-');
+                        const statusIndicator = `<span class="status-indicator ${statusClass}"></span>${statusText}`;
+
+                        tableHTML += `<tr><td>${trackId}</td><td>${statusIndicator}</td><td>${time}</td><td>${day}</td><td>${destinations}</td><td>${blNo}</td></tr>`;
+                    });
+
+
+                    tableHTML += '</tbody></table>';
+                    dataContainer.innerHTML = tableHTML;
+                    convertButton.textContent = "Convert to Boxes";
+                    convertButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16" style="vertical-align: middle; margin-right: 5px;"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg> Boxes`;
+
+                } else {
+                    dataContainer.innerHTML = originalHTML;
+                    convertButton.textContent = "Convert to Table";
+                    convertButton.innerHTML = `<i class ="fa fa-table"></i> Table`;
+
+                    // Reattach event listeners
+                    attachTabEventListeners();
+                    attachBoxEventListeners();
+                }
+            });
+
+            // Initialize event listeners
+            attachTabEventListeners();
+            attachBoxEventListeners();
+        });
+
+
+        function searchBoxes() {
+            let input = document.getElementById("searchInput").value.toUpperCase();
+            let isTableView = document.getElementById("dataContainer").classList.contains("table-view");
+
+            if (isTableView) {
+                // Searching in table view
+                let rows = document.querySelectorAll("#dataContainer table tbody tr");
+
+                rows.forEach(row => {
+                    let trackId = row.children[0].innerText.toUpperCase();
+                    let blNo = row.children[5].innerText.toUpperCase();
+
+                    if (trackId.includes(input) || blNo.includes(input)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+
+            } else {
+                // Searching in box view
+                let boxes = document.querySelectorAll(".epod_dash_box");
+
+                boxes.forEach(box => {
+                    let trackId = box.querySelector(".track_id")?.innerText.toUpperCase() || "";
+                    let blNo = box.querySelector(".bl_no")?.innerText.toUpperCase() || "";
+
+                    if (trackId.includes(input) || blNo.includes(input)) {
+                        box.style.display = "block";
+                        box.style.maxWidth = "fit-content";
+                    } else {
+                        box.style.display = "none";
+                    }
+                });
+            }
+        }
+
+        // Enable search on input keyup
+        document.getElementById("searchInput").addEventListener("keyup", searchBoxes);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const filters = document.querySelectorAll(".list.filter"); // All filters
+            const dataContainer = document.getElementById("dataContainer");
+            let activeFilter = null; // Track active filter
+
+            function applyFilter() {
+                let isTableView = dataContainer.classList.contains("table-view");
+
+                if (isTableView) {
+                    // Filtering in table view
+                    let rows = document.querySelectorAll("#dataContainer table tbody tr");
+
+                    rows.forEach(row => {
+                        let statusText = row.children[1].innerText.trim(); // Get status text
+
+                        if (activeFilter === null || matchesFilter(statusText, activeFilter)) {
+                            row.style.display = "";
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+
+                } else {
+                    // Filtering in box view
+                    let epodBoxes = document.querySelectorAll(".epod_dash_box");
+
+                    epodBoxes.forEach(box => {
+                        let statusText = box.querySelector(".status p")?.innerText.trim() || "";
+
+                        if (activeFilter === null || matchesFilter(statusText, activeFilter)) {
+                            box.style.display = "block";
+                            box.style.maxWidth = "fit-content";
+                        } else {
+                            box.style.display = "none";
+                        }
+                    });
+                }
+            }
+
+            function matchesFilter(status, filter) {
+                switch (filter) {
+                    case "Pending": return status === "Awaiting takeoff";
+                    case "Completed": return status === "In transit";
+                    case "Cancelled": return status === "Arrived";
+                    case "In Progress": return status === "Completed";
+                    default: return true;
+                }
+            }
+
+            filters.forEach(filter => {
+                filter.addEventListener("click", function () {
+                    const selectedFilter = this.getAttribute("data-filter");
+
+                    if (activeFilter === selectedFilter) {
+                        filters.forEach(f => f.classList.remove("active"));
+                        activeFilter = null;
+                    } else {
+                        filters.forEach(f => f.classList.remove("active"));
+                        this.classList.add("active");
+                        activeFilter = selectedFilter;
+                    }
+
+                    applyFilter();
+                });
+            });
+        });
+
+
+
+    </script>
+
 
     <script>
 
@@ -1090,26 +1309,6 @@
 
 
 
-        function searchBoxes() {
-            let input = document.getElementById("searchInput").value.toUpperCase();
-            let boxes = document.getElementsByClassName("epod_dash_box");
-
-            for (let i = 0; i < boxes.length; i++) {
-                let trackId = boxes[i].getElementsByClassName("track_id")[0].innerText.toUpperCase();
-                let blNo = boxes[i].getElementsByClassName("bl_no")[0].innerText.toUpperCase();
-
-                if (trackId.includes(input) || blNo.includes(input)) {
-                    boxes[i].style.display = "block";
-                    boxes[i].style.maxWidth = "fit-content"
-                } else {
-                    boxes[i].style.display = "none";
-                }
-            }
-        }
-
-        // Enable search on input keyup
-        document.getElementById("searchInput").addEventListener("keyup", searchBoxes);
-
 
     </script>
 
@@ -1122,54 +1321,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const filters = document.querySelectorAll(".list.filter"); // All filters
-            const epodBoxes = document.querySelectorAll(".epod_dash_box"); // All boxes
-            let activeFilter = null; // Track active filter
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const filters = document.querySelectorAll(".list.filter"); // All filters
+        //     const epodBoxes = document.querySelectorAll(".epod_dash_box"); // All boxes
+        //     let activeFilter = null; // Track active filter
 
-            filters.forEach(filter => {
-                filter.addEventListener("click", function () {
-                    const selectedFilter = this.getAttribute("data-filter"); // Get filter type
+        //     filters.forEach(filter => {
+        //         filter.addEventListener("click", function () {
+        //             const selectedFilter = this.getAttribute("data-filter"); // Get filter type
 
-                    // If clicking the same active filter, reset and show all boxes
-                    if (activeFilter === selectedFilter) {
-                        filters.forEach(f => f.classList.remove("active")); // Remove active class
-                        epodBoxes.forEach(box => box.style.display = "block"); // Show all boxes
-                        activeFilter = null; // Reset active filter
-                        return;
-                    }
+        //             // If clicking the same active filter, reset and show all boxes
+        //             if (activeFilter === selectedFilter) {
+        //                 filters.forEach(f => f.classList.remove("active")); // Remove active class
+        //                 epodBoxes.forEach(box => box.style.display = "block"); // Show all boxes
+        //                 activeFilter = null; // Reset active filter
+        //                 return;
+        //             }
 
-                    // Otherwise, apply filter
-                    filters.forEach(f => f.classList.remove("active")); // Remove active class
-                    this.classList.add("active"); // Add active class to clicked filter
-                    activeFilter = selectedFilter; // Update active filter
+        //             // Otherwise, apply filter
+        //             filters.forEach(f => f.classList.remove("active")); // Remove active class
+        //             this.classList.add("active"); // Add active class to clicked filter
+        //             activeFilter = selectedFilter; // Update active filter
 
-                    epodBoxes.forEach(box => {
-                        const statusText = box.querySelector(".status p").innerText.trim(); // Get box status
+        //             epodBoxes.forEach(box => {
+        //                 const statusText = box.querySelector(".status p").innerText.trim(); // Get box status
 
-                        let match = false;
-                        switch (selectedFilter) {
-                            case "Pending":
-                                match = statusText === "Awaiting takeoff";
-                                break;
-                            case "Completed":
-                                match = statusText === "In transit";
-                                break;
-                            case "Cancelled":
-                                match = statusText === "Arrived";
-                                break;
-                            case "In Progress":
-                                match = statusText === "Completed";
-                                break;
-                        }
+        //                 let match = false;
+        //                 switch (selectedFilter) {
+        //                     case "Pending":
+        //                         match = statusText === "Awaiting takeoff";
+        //                         break;
+        //                     case "Completed":
+        //                         match = statusText === "In transit";
+        //                         break;
+        //                     case "Cancelled":
+        //                         match = statusText === "Arrived";
+        //                         break;
+        //                     case "In Progress":
+        //                         match = statusText === "Completed";
+        //                         break;
+        //                 }
 
-                        box.style.display = match ? "block" : "none"; //
-                        box.style.maxWidth = match ? "fit-content" : "auto"; //
-                        //  Show/hide based on match
-                    });
-                });
-            });
-        });
+        //                 box.style.display = match ? "block" : "none"; //
+        //                 box.style.maxWidth = match ? "fit-content" : "auto"; //
+        //                 //  Show/hide based on match
+        //             });
+        //         });
+        //     });
+        // });
     </script>
 
 
@@ -1568,7 +1767,7 @@
             });
         });
 
-
+        // 12233444
         const handleSideToggle = () => {
             const epodDetails = document.querySelector('.epod_cont main .epod_details');
 
