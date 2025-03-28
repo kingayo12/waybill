@@ -1410,7 +1410,7 @@ h3.light {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   font-family: sans-serif;
   font-size: 12px;
 }
