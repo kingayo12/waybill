@@ -328,6 +328,8 @@
                         <button type="button" id="company" title="navigate to tab" class="epod_navlink">Company</button>
                         <button type="button" id="waybill_p" title="navigate to tab"
                             class="epod_navlink">Waybill</button>
+                        <button type="button" id="waybill_p2" title="navigate to tab"
+                            class="epod_navlink">S_P_Waybill</button>
                     </div>
                 </div>
                 <div class="epod-tab_contents">
@@ -627,18 +629,7 @@
                         </div>
                     </div>
                     <div id="waybill_p" class="tab">
-                        <!-- <div class="scale-container">
-                            <label for="scale">Scale:</label>
-                            <input type="range" id="scale" min="0.5" max="2" step="0.1" value="1"
-                                oninput="updateScale(this.value)">
-                            <div class="scale-labels">
-                                <span>0%</span>
-                                <span class="mid-label">100%</span>
-                                <span>200%</span>
-                            </div>
-                            <button class="fit_btn" type="button" onclick="scaleToFitScreen()">
-                                <i class="fa fa-expand-wide"></i> Fit to Screen</button>
-                        </div> -->
+
                         <div class="scale-container">
                             <button type="button" onclick="handleSign()" class="bt1op" title="Sign"> <i
                                     class="fa-sharp fa-solid fa-pen-nib"></i>
@@ -658,12 +649,13 @@
 
 
                                 <div class="header">
-                                    <div class="logo_cont">
+                                    <div class="logo_cont"></div>
+                                    <div class="logo_cont js-left">
                                         <div class="logo">
                                             <img src="./ing.png" alt="">
                                         </div>
                                     </div>
-                                    <div class="detailed_info">
+                                    <!-- <div class="detailed_info">
                                         <div class="mail">info@libracircle.com<i class="fa fa-envelope"></i></div>
                                         <div class="address">no 11, Orimolade Crescent, Off Adeniyi Jones, Ikeja Lagos
                                             Nigeria <i class="fa fa-location"></i>
@@ -671,7 +663,7 @@
                                         <div class="website">https://libracircle.com<i class="fa fa-globe"></i></div>
                                         <div class="phone">(234) 909 9710 778, (234) 818 4792 309<i
                                                 class="fa fa-phone"></i></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <h2 class="title2">WAYBILL <span class="waybill_num">FMCG/2024/0001</span></h2>
                                 <h3>DISPATCH SECTION</h3>
@@ -684,12 +676,12 @@
                                             Junction, Off Dawakin Kudu Road, Dawakin Local Government, Kano State,
                                             Nigeria.</span> Burn
                                     </p>
-                                    <!-- <p><span class="bold">Contact Person:</span>
+                                    <p><span class="bold">Contact Person:</span>
                                         <span class="cont_info">Jerry</span>
                                     </p>
                                     <p><span class="bold">Phone:</span>
                                         <span class="tel_info">08138543842</span>
-                                    </p> -->
+                                    </p>
                                 </div>
 
 
@@ -698,8 +690,8 @@
                                     <tr>
                                         <th>Transporter's Name</th>
                                         <td>Libra Circle</td>
-                                        <th>Freight Forwarder</th>
-                                        <td>Not specified</td>
+                                        <!-- <th>Freight Forwarder</th>
+                                        <td>Not specified</td> -->
                                     </tr>
                                 </table>
 
@@ -720,7 +712,7 @@
                                     <tr>
                                         <th>Tracker Found (Yes/No)</th>
                                         <td>Not specified</td>
-                                        <th>Arrival Date</th>
+                                        <th>Loaded Date</th>
                                         <td>Not specified</td>
                                     </tr>
                                 </table>
@@ -741,14 +733,14 @@
                                         <td>Not specified</td>
                                     </tr>
                                     <tr>
-                                        <th>Loaded Date</th>
+                                        <th>Offloading Date</th>
                                         <td>Not specified</td>
                                         <th>Final Destination</th>
                                         <td>Not specified</td>
                                     </tr>
 
                                     <tr>
-                                        <th>Offloading Date</th>
+                                        <th>Arrival Date</th>
                                         <td>Not specified</td>
                                     </tr>
 
@@ -758,16 +750,18 @@
                                 <table>
                                     <tr>
                                         <th>Goods Description</th>
-                                        <th>Goods Size & <br /> Seal No (Origin)</th>
+                                        <th>Goods Size</th>
                                         <th>Unit Type</th>
-                                        <th>QTY Recieved<br /> (Origin)</th>
-                                        <th>QTY Recieved<br /> (Dest.)</th>
-                                        <th>Difference<br /> (Origin - Destination)</th>
+                                        <th>Unit Weight</th>
+                                        <th>Total QTY</th>
+                                        <th>Sound</th>
+                                        <th>Other</th>
                                     </tr>
                                     <tr>
                                         <td>WIRE</td>
                                         <td>1X20FT</td>
                                         <td>Container</td>
+                                        <td>Not specified</td>
                                         <td>Not specified</td>
                                         <td>Not specified</td>
                                         <td>Not specified</td>
@@ -789,26 +783,36 @@
 
 
 
-                                <h3>Driver & Dispatch Info</h3>
+                                <h3>Driver Info</h3>
                                 <table>
                                     <tr>
                                         <th>Driver’s Name</th>
                                         <td>BABA</td>
-                                        <th>Dispatched by</th>
-                                        <td>Not specified</td>
-                                    </tr>
-                                    <tr>
-                                        <th>truck/vechicle no.</th>
-                                        <td>Not specified</td>
                                         <th>Title</th>
                                         <td>Not specified</td>
                                     </tr>
-                                    <tr>
-
+                                    <!-- <tr>
+                                        <th>truck/vechicle no.</th>
+                                        <td>Not specified</td>
                                         <th>Phone Number</th>
                                         <td>7078691299</td>
-                                        <!-- <th>Final Destination</th>
-                                        <td>Not specified</td> -->
+                                    </tr> -->
+
+
+                                </table>
+                                <h3>Dispatch & Reciever Info</h3>
+                                <table>
+                                    <tr>
+                                        <th>Dispatched by</th>
+                                        <td>Not specified</td>
+                                        <th>Recieved by</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Title</th>
+                                        <td>Not specified</td>
+                                        <th>Title</th>
+                                        <td>Not specified</td>
                                     </tr>
                                     <!-- <tr>
                                         <th>Signature and Date</th>
@@ -921,6 +925,292 @@
                                     class="fa fa-angle-up"></i></button>
                         </div>
                     </div>
+                    <div id="waybill_p2" class="tab">
+                        <!-- 
+                        <div class="scale-container">
+                            <button type="button" onclick="handleSign()" class="bt1op" title="Sign"> <i
+                                    class="fa-sharp fa-solid fa-pen-nib"></i>
+                            </button>
+                            <button type="button" onclick="handleStamp()" class="bt2op" title="Stamp"> <i
+                                    class="fa-sharp fa-solid fa-stamp"></i>
+                            </button>
+                            <button onclick="panzoom.zoomIn()" title="Zoom In"> <i class="fa fa-plus"></i> </button>
+                            <button onclick="panzoom.zoomOut()" title="Zoom Out">
+                                <div class="fa fa-minus" title="Reset Zoom"></div>
+                            </button>
+                            <button onclick="panzoom.reset()"><i class="fa fa-refresh"></i></button>
+                        </div> -->
+                        <div id="zoom-container2">
+                            <div class="waybill_container2" id="waybill_special" data-action="zoom2">
+
+
+
+                                <div class="header">
+                                    <div class="logo_cont consignee_logo">
+                                        <div class="logo">
+                                            <img src="./ing.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="logo_cont js-left">
+                                        <div class="logo">
+                                            <img src="./ing.png" alt="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <h2 class="title2">WAYBILL <span class="waybill_num">FMCG/2024/0001</span></h2>
+                                <h3>DISPATCH SECTION</h3>
+                                <div class="patner_cont">
+                                    <h3>Consignee's Name & Address</h3>
+                                    <p><span class="bold">Client:</span> <span class="p_info">MOZUK MEDIEQUIP &
+                                            COMMODITIES
+                                            SOLUTIONS LIMITED</span></p>
+                                    <p><span class="bold">Address:</span>
+                                        <span class="add_info">Gecko Warehouse, Arepo, Arepo B/Stop, off
+                                            Lagos Ibadan Expressway.</span>
+                                    </p>
+                                </div>
+
+
+
+                                <h3>Transporter Information</h3>
+                                <table>
+                                    <tr>
+                                        <th>Transporter's Name</th>
+                                        <td>Libra Circle</td>
+                                        <th>Freight Forwarder</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Reference</th>
+                                        <td>Not specified</td>
+
+                                    </tr>
+                                </table>
+
+                                <h3>Waybill Details</h3>
+                                <table>
+                                    <tr>
+                                        <th>BL Number</th>
+                                        <td>PNG000602-240418068/AGLN0806[SHPL40620400]</td>
+                                        <th>Container No.</th>
+                                        <td>PCIU1924760</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Container Seal No.</th>
+                                        <td>Not specified</td>
+                                        <th>Sealed (Yes/No)</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tracker Found (Yes/No)</th>
+                                        <td>Not specified</td>
+                                        <th>Loaded Date</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                </table>
+
+                                <h3>Shipment Information</h3>
+                                <table>
+                                    <tr>
+                                        <th>CLIENT REF</th>
+                                        <td>xxx112</td>
+                                        <th>CONSIGNEE</th>
+                                        <td>BURN STOVES NIGERIA LIMITED</td>
+                                    </tr>
+                                    <tr>
+                                        <th>FROM</th>
+                                        <td>Burn Nigeria Limited, Bala Dawakin Industrial Layout, Charo junction, Kano
+                                            State, Nigeria</td>
+                                        <th>TO</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Offloading Date</th>
+                                        <td>Not specified</td>
+                                        <th>Final Destination</th>
+                                        <td>Not specified</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Arrival Date</th>
+                                        <td>Not specified</td>
+                                    </tr>
+
+                                </table>
+
+                                <h3>Goods Details</h3>
+                                <table>
+                                    <tr>
+                                        <th>Goods Description</th>
+                                        <th>Goods Size & <br /> Seal No (Origin)</th>
+                                        <th>Unit Type</th>
+                                        <th>QTY Recieved<br /> (Origin)</th>
+                                        <th>QTY Recieved<br /> (Dest.)</th>
+                                        <th>Difference<br /> (Origin - Destination)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>WIRE</td>
+                                        <td>1X20FT</td>
+                                        <td>Container</td>
+                                        <td>Not specified</td>
+                                        <td>Not specified</td>
+                                        <td>Not specified</td>
+
+                                    </tr>
+                                </table>
+
+                                <div class="remarks">
+                                    <div class="trigger_remark"><i class="fa fa-comment"></i></div>
+                                    <div class="popup_remark">
+                                        <label><input type="radio" name="remark" value="Very Good"> Very Good</label>
+                                        <label><input type="radio" name="remark" value="Good"> Good</label>
+                                        <label><input type="radio" name="remark" value="Not Good"> Not Good</label>
+                                    </div>
+                                    <h3>Remarks</h3>
+                                    <textarea placeholder="remark" id="remarkv" readonly></textarea>
+                                </div>
+                                <h3>Comment</h3>
+                                <textarea id="comment"></textarea>
+
+
+
+                                <h3>Driver Info</h3>
+                                <table>
+                                    <tr>
+                                        <th>Driver’s Name</th>
+                                        <td>BABA</td>
+                                        <th>Title</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th>truck/vechicle no.</th>
+                                        <td>Not specified</td>
+                                        <th>Phone Number</th>
+                                        <td>7078691299</td>
+                                    </tr> -->
+
+
+                                </table>
+                                <h3>Dispatch & Reciever Info</h3>
+                                <table>
+                                    <tr>
+                                        <th>Dispatched by</th>
+                                        <td>Not specified</td>
+                                        <th>Recieved by</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Title</th>
+                                        <td>Not specified</td>
+                                        <th>Title</th>
+                                        <td>Not specified</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th>Signature and Date</th>
+                                        <td>Not specified</td>
+                                        <th>Signature and Date</th>
+                                        <td>Not specified</td>
+                                    </tr> -->
+                                </table>
+
+
+
+
+
+
+                                <div class="footer">
+                                    <div class="fot1">
+
+
+                                    </div>
+
+                                    <div class="fot2">
+                                        <div class="fort_fot ">
+                                            <!-- <h3>Terms and Conditions</h3> -->
+                                            <p> <span class="bold">Phone: </span> (234) 909 9710 778, (234) 818 4792 309
+                                            </p>
+                                            <p> <span class="bold">website: </span> https://libracircle.com</p>
+                                            <p> <span class="bold">Email: </span> info@libracircle.com</p>
+                                            <p class="upt"> <span class="bold">TIN: </span> 02624825-0001 | RC-32913 |
+                                                VAT
+                                                IKV0600232913</p>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="stamp_p s1" onclick="activateStamp(this)">
+                                    <div class="title">Reciever Info (for loading)</div>
+                                    <div class="sign1"></div>
+                                    <div class="stamp1"></div>
+                                </div>
+                                <div class="stamp_p s2" onclick="activateStamp(this)">
+                                    <div class="title">Local Agent Info (for loading)</div>
+                                    <div class="sign1"></div>
+                                    <div class="stamp1"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="sign_modal">
+                            <form class="sign_wrapper">
+                                <div class="sign_view"></div>
+                                <div class="op_msg">Are you sure you want to sign this document?</div>
+
+                                <div class="sign_opt">
+                                    <button onclick="handleSignSubmition()" type="submit">Yes</button>
+                                    <button class="no" onclick="handleCloseModal()" type="button">No</button>
+                                </div>
+                                <p class="sign_msg"></p>
+                            </form>
+
+                        </div>
+
+                        <div class="stamp_modal">
+                            <form class="stamp_wrapper" id="stampForm" action="">
+                                <input type="hidden" name="record_id" value="12345"> <!-- Example Record ID -->
+                                <input type="hidden" name="user_id" value="67890"> <!-- Example User ID -->
+
+                                <div class="stamp_view">
+                                    <img src="./stamp1.svg" alt="" id="stampImage">
+                                </div>
+                                <div class="op_msg">Are you sure you want to stamp this document?</div>
+                                <small class="notexs"> <span>Note:</span> Time stamp is based on server time and not
+                                    your device time</small>
+                                <div class="stamp_opt">
+                                    <button type="submit">Yes</button>
+                                    <button class="no" type="button" onclick="handleCloseModal()">No</button>
+                                </div>
+                                <p class="stamp_msg"></p>
+                            </form>
+                        </div>
+
+                        <div class="actions_op noshowp">
+
+                            <!-- <button type="button" onclick="window.print()"> <i class="fa-solid fa-print"></i>
+                                Print</button> -->
+                            <div class="dropdown">
+                                <button type="button"> <i class="fa-solid fa-download"></i> Download</button>
+                                <div class="dropdown-content">
+                                    <button onclick="downloadWaybillAsPDF()"><i class="fa fa-file"></i> As
+                                        PDF</button>
+                                    <button onclick="downloadWaybillAsImage()"><i class="fa fa-image"></i> As
+                                        Image</button>
+                                </div>
+                            </div>
+                            <button type="button" onclick="shareWaybillAsImage()"> <i
+                                    class="fa-sharp fa-solid fa-share-from-square"></i>Share</button>
+                            <button type="button" class="collapse_action" title="collapse action"> <i
+                                    class="fa fa-angle-up"></i></button>
+                        </div>
+                    </div>
+
                     <!-- Hidden File Input -->
                     <input type="file" id="imageInput" accept="image/*" style="display: none;"
                         onchange="previewImage()">
