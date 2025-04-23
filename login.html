@@ -26,14 +26,17 @@
                     <div class="logo">
                         <img src="1440x208 logo.png" alt="">
                     </div>
-                    <!-- <h2>Login</h2> -->
+                    <!-- <h2>Login with</h2> -->
                     <div class="login-options">
-                        <button id="loginWithPassword" class="active">Username & Password</button>
-                        <button id="loginWithCode">Access Code</button>
+                        <button id="loginWithPassword" class="active">Admin</button>
+                        <button id="loginWithCode">Sub Users</button>
                     </div>
 
                     <!-- Username & Password Login -->
                     <form id="passwordLoginForm">
+                        <p style="font-size: 12px;">For pre-registered organization administrators, contact <span
+                                style="text-transform: capitalize; font-weight: bold;">libra circle IT</span> to sign up
+                        </p>
                         <label for="username">Username</label>
                         <div class="form_control">
                             <input type="text" id="username" placeholder="Enter your username">
@@ -62,6 +65,12 @@
 
                     <!-- Access Code Login -->
                     <form id="codeLoginForm" style="display: none;">
+                        <div class="summary">
+                            <p style="font-size: 12px;">Users with access code
+                                can confirm arrival, sign and stamp waybills or confirm completion of delivery. <br>
+                                Contact organization administator to request your access code</p>
+
+                        </div>
                         <label for="accessCode">8-Digit Access Code</label>
 
                         <div class="form_control">
