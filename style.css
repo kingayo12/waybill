@@ -190,7 +190,8 @@ body {
 }
 
 .epod_cont main .epod_contents {
-  display: none;
+  width: 100%;
+  display: flex;
 }
 
 .epod_cont main .epod_tracking .epod_content {
@@ -283,6 +284,20 @@ body {
 .epod_cont main .epod_tracking .epod_content .epod_boxes .epod_dash_box .truck_img img {
   width: 100%;
   /* background: var(--primary-color); */
+}
+
+.nav-toggle {
+  display: none;
+  padding: 0 5px;
+  background: transparent;
+  font-size: 25px;
+  border-style: none;
+  border-radius: 5px;
+}
+
+.nav-toggle:hover {
+  background: #ffffff69;
+  cursor: pointer;
 }
 
 .epod_cont main .epod_details.show {
@@ -725,7 +740,37 @@ body {
 
   .epod_cont aside {
     display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 99999;
   }
+
+  .epod_cont aside.shownav {
+    display: block;
+  }
+
+  .epod_cont aside.shownav .close_sidebar {
+    display: flex;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+.epod_cont aside .close_sidebar {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  background: #e9e9e973;
+  width: 25px;
+  height: 25px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
 .doc_img {
@@ -1414,25 +1459,25 @@ h3.light {
 table {
   width: 100%;
   border-collapse: collapse;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   font-family: sans-serif;
   font-size: 12px;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: var(--primary-color);
   font-weight: bold;
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: transparent;
 }
 
 tr:hover {
@@ -1488,14 +1533,15 @@ tr:hover {
 .epod_cont main .sidebar {
   width: 250px;
   min-width: 250px;
-  background: linear-gradient(to top, var(--primary-color), rgb(0, 36, 119));
-  color: white;
+  background: color-mix(in srgb, #fff 90%, var(--primary-color) 10%);
+  color: rgb(0, 0, 0);
   padding: 20px;
   box-sizing: border-box;
+  /* box-shadow: 2px 3px 4px #ccc; */
 }
 
 .epod_cont main .sidebar i {
-  color: #fff;
+  color: var(--primary-color);
   margin-right: 10px;
 }
 .epod_cont main .sidebar h2 {
@@ -1505,7 +1551,7 @@ tr:hover {
 .epod_cont main .menu-item {
   cursor: pointer;
   padding: 10px 0;
-  border-bottom: 1px solid #a8a8a8;
+  /* border-bottom: 1px solid #3f3f3f5f; */
 }
 .epod_cont main .submenu {
   padding-left: 15px;
@@ -1513,7 +1559,7 @@ tr:hover {
   flex-direction: column;
 }
 .epod_cont main .submenu a {
-  color: #ffffff;
+  color: #282828;
   padding: 6px 0;
   text-decoration: none;
   font-size: 14px;
@@ -1525,15 +1571,16 @@ tr:hover {
 .epod_cont main .logout-btn {
   margin-top: 40px;
   padding: 10px;
-  background-color: #ef4444;
+  background-color: #fff;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   width: 100%;
   cursor: pointer;
 }
 .epod_cont main .main-content {
   flex: 1;
   padding: 30px;
+  overflow-y: scroll;
 }
 
 .epod_cont main .settings-container .tab-content {
@@ -1545,14 +1592,28 @@ tr:hover {
   width: 100%;
 }
 
-.epod_cont main .tab-content h1 {
+.epod_cont main h1 {
   padding-bottom: 20px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.epod_cont main h1:before {
+  position: absolute;
+  content: "";
+  right: 0;
+  width: calc(100% - 200px);
+  height: 1px;
+  background: linear-gradient;
 }
 
 .epod_cont main .settings-container .form-group {
-  /* margin-bottom: 20px; */
-  flex: 1 1 250px;
-  width: calc(33.33% - 20px);
+  flex: 1 230px 0;
+
+  width: calc(25% - 20px);
+  min-width: 20%;
 }
 
 /* .epod_cont main .tab-content {
@@ -1782,4 +1843,137 @@ tr:hover {
 .epod_cont main .table-container::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 4px;
+}
+
+.opi {
+  background: transparent;
+  color: #fff;
+  margin-bottom: 20px;
+  border-style: none;
+}
+
+/* Modal Background */
+.cps_action-modal-overlay {
+  position: fixed;
+  /* display: none; */
+  background-color: transparent;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  /* width: 200px; */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Box */
+.cps_action-modal-content {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 8px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Heading */
+.cps_action-modal-content h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Modal Actions */
+.cps_action-modal-actions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 5px 0;
+}
+
+.cps_action-modal-actions li {
+  margin-bottom: 5px;
+}
+
+.cps_action-modal-actions button {
+  width: 100%;
+  padding: 3px;
+  border: none;
+  background: none;
+  color: #333;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cps_action-modal-actions button:hover {
+  color: var(--primary-color); /* blue on hover */
+}
+
+/* Modal Footer */
+.cps_action-modal-footer {
+  text-align: right;
+}
+
+.cps_action-modal-footer button {
+  padding: 8px 16px;
+  background-color: #cccccc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cps_action-modal-footer button:hover {
+  background-color: #aaaaaa;
+}
+
+/* Hidden class */
+.cps_action-modal-hidden {
+  display: none !important;
+}
+
+/* Table Styling */
+.signature-img {
+  width: 50px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.more-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+}
+.more-btn:hover {
+  color: var(--primary-color);
+}
+
+.signature-img {
+  width: 60px;
+  height: 35px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  padding: 2px;
+  background: #f9fafb;
+}
+
+.dataTables_length {
+  margin-bottom: 20px;
+}
+.subUserTable_filter {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1204px) {
+  .epod_cont main .settings-container .form-group {
+    flex: 1 1 200px;
+  }
+}
+
+@media (max-width: 512px) {
+  .epod_cont main .settings-container .form-group {
+    flex: 1 1 230px;
+  }
 }

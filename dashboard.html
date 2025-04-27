@@ -11,6 +11,12 @@
         integrity="sha512-D2vagE/4+QTyP2FukMZNoZxcO1Uqcd0SsnqczdOm+zu35XDsFDIroYXxDD0WrYbyPFKD1vUmhxaCC3kR8WBNZA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery -->
+
+
 
     <link rel="stylesheet" href="waybill.css">
 
@@ -40,6 +46,7 @@
         <aside>
             <nav class="epod_nav">
 
+
                 <div class="user_wrap" onclick="ToggleNavMenu(this)">
                     <div class="user_img">
                         <img src="/" alt="">
@@ -51,25 +58,13 @@
                     </div>
 
                 </div>
+                <div class="close_sidebar" onclick="handleCloseSidebar()">X</div>
                 <ul>
 
 
-                    <!-- <li class="nav-item"><a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-                    <li class="nav-item dropdown">
-                        <a href="#"><i class="fas fa-truck"></i>Waybill Management <i class="fa fa-caret-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fas fa-plus-circle"></i>Create Waybill</a></li>
-                            <li><a href="#"><i class="fas fa-search"></i>Track Waybill</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#"><i class="fas fa-chart-bar"></i>Reports &#9662;</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fas fa-calendar-day"></i>Daily Reports</a></li>
-                            <li><a href="#"><i class="fas fa-calendar-alt"></i>Monthly Reports</a></li>
-                        </ul>
-                    </li> -->
-                    <li class="nav-item settings"><a href="#"><i class="fas fa-cog"></i>Settings</a></li>
+
+                    <li class="nav-item settings"><a href="#" onclick="switchToSettings()"><i
+                                class="fas fa-cog"></i>Settings</a></li>
                     <li class="nav-item signout"><a href="#"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li>
                 </ul>
             </nav>
@@ -78,6 +73,7 @@
             <div class="epod_contents">
                 <div class="epod_tracking">
                     <div class="header">
+                        <button class="nav-toggle" onclick="toggleSidebar()">☰</button>
                         <h3>Tracking</h3>
                         <div class="search_cont" onclick="handleDropSearch()">
                             <i class="fa fa-search"></i>
@@ -1272,41 +1268,49 @@
                     </div>
                 </div>
             </div>
-            <div class="settings-container">
-                <div class="sidebar">
-                    <h2><i class="fas fa-cogs"></i> Settings</h2>
 
-                    <div class="menu-item" onclick="toggleMenu('generalSubmenu')">General Settings</div>
-                    <div class="submenu" id="generalSubmenu">
+            <div class="settings-container" style="display: none;">
+                <div class="sidebar">
+                    <button class="back-btn opi" onclick="goBack1()" style="color: black;">← Back</button>
+
+                    <h2> Settings</h2>
+
+                    <div class="menu-item" onclick="showTab('generalsettings')"><i class="fas fa-cogs"></i> General
+                    </div>
+                    <!-- <div class="submenu" id="generalSubmenu">
                         <a onclick="showTab('stam')"><i class="fas fa-file-alt"></i> STAM</a>
                         <a onclick="showTab('signature')"><i class="fas fa-pen-nib"></i> Signature</a>
-                    </div>
+                    </div> -->
 
-                    <div class="menu-item" onclick="toggleMenu('subUserSubmenu')">Sub Users</div>
-                    <div class="submenu" id="subUserSubmenu">
+                    <div class="menu-item" onclick="showTab('users')"><i class="fas fa-user-plus"></i> Users</div>
+                    <!-- <div class="submenu" id="subUserSubmenu">
                         <a onclick="showTab('createSubUser')"><i class="fas fa-user-plus"></i>Create Sub User</a>
                         <a onclick="showTab('manageSubUsers')"><i class="fas fa-user-edit"></i> Manage Sub Users</a>
-                    </div>
+                    </div> -->
 
-                    <div class="menu-item" onclick="toggleMenu('facilitySubmenu')">Facilities</div>
-                    <div class="submenu" id="facilitySubmenu">
+                    <div class="menu-item" onclick="showTab('facility')"><i class="fas fa-plus-square"></i>
+                        Facilities
+                    </div>
+                    <!-- <div class="submenu" id="facilitySubmenu">
                         <a><i class="fas fa-plus-square"></i> Create Facility</a>
                         <a><i class="fas fa-tasks"></i> Manage Facility</a>
-                    </div>
+                    </div> -->
 
                     <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</button>
                 </div>
 
                 <div class="main-content">
                     <div id="welcome" class="tab-content active">
-                        <button class="back-btn" onclick="goBack()" style="display: none;">← Back</button>
+                        <button class="back-btn " onclick="goBack()" style="display: none;">← Back</button>
                         <h1>Welcome to Settings</h1>
                         <p>Select an item from the menu to view or edit settings.</p>
                     </div>
 
-                    <div id="stam" class="tab-content">
+                    <div id="generalsettings" class="tab-content">
 
-                        <h1><button class="back-btn" onclick="goBack()" style="display: none;">← Back</button> STAM</h1>
+                        <h1><button class="back-btn" onclick="goBack()" style="display: none;">← Back</button>GENERAL
+                        </h1>
+                        <h1>Stamp</h1>
                         <form>
                             <input type="hidden" name="clientid">
                             <div class="form-group floating-label">
@@ -1317,16 +1321,22 @@
                                 <input id="companySlogan" type="text" placeholder=" " required />
                                 <label for="CompnaySlogan">Company Slogan</label>
                             </div>
+                            <div class="form-group floating-label">
+                                <select id="stampOption" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="paid">Paid</option>
+                                    <option value="recieved">recieved</option>
+                                    <option value="stamp">stamp</option>
+                                </select>
+                                <label for="signatureOption">Select stamp text</label>
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="submit-btn">Save Info</button>
 
                             </div>
                         </form>
-                    </div>
 
-                    <div id="signature" class="tab-content">
-                        <h1><button class="back-btn" onclick="goBack()" style="display: none;">← Back</button> Signature
-                            Settings</h1>
+                        <!-- <h1>Signature</h1>
                         <form action="">
                             <div class="form-group floating-label">
                                 <input type="text" id="firstName" value="Administator" readonly placeholder=" " />
@@ -1347,15 +1357,17 @@
                                 </select>
                                 <label for="signatureOption">Select Signature Style</label>
                             </div>
+
                             <div class="form-group"><button class="submit-btn">Save Signature</button></div>
 
-                        </form>
-
+                        </form> -->
                     </div>
 
-                    <div id="createSubUser" class="tab-content">
+
+
+                    <div id="users" class="tab-content">
                         <button class="back-btn" onclick="goBack()" style="display: none;">← Back</button>
-                        <h2>Create Sub User</h2>
+                        <h1>Create User</h1>
                         <form action="">
                             <div class="form-group floating-label">
                                 <input type="text" id="subFirstName" placeholder=" " required />
@@ -1367,7 +1379,7 @@
                                 <label for="subLastName">Last Name</label>
                             </div>
 
-                            <!-- Hidden Client ID -->
+
                             <input type="hidden" id="clientId" value="123456" />
 
                             <div class="form-group floating-label">
@@ -1379,18 +1391,31 @@
                                 </select>
                                 <label for="subSignature">Select Signature Style</label>
                             </div>
+                            <div class="form-group floating-label">
+                                <select id="roleOption" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="sig1">Admin</option>
+                                    <option value="sig2">Sub user 1</option>
+                                    <option value="sig3">Sub user 2</option>
+                                </select>
+                                <label for="signatureOption">Select Role</label>
+                            </div>
                             <div class="form-group">
                                 <button class="submit-btn">Create User</button>
                             </div>
                         </form>
 
-                        <div class="table-container">
-                            <table class="sub-user-table">
+                        <div class="table-container" style="margin-top: 20px;">
+                            <h1>Existing Users</h1>
+                            <!-- Table -->
+                            <table id="subUserTable" class="display">
                                 <thead>
                                     <tr>
                                         <th>First Name</th>
                                         <th>Last Name</th>
+                                        <th>Role</th>
                                         <th>Access Code</th>
+                                        <th>Signature</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -1398,53 +1423,189 @@
                                     <tr>
                                         <td>Chinedu</td>
                                         <td>Okafor</td>
+                                        <td>Admin</td>
                                         <td>CHN123</td>
-                                        <td>
-                                            <button class="edit-btn">E</button>
-                                            <button class="delete-btn">D</button>
+                                        <td><img src="https://via.placeholder.com/50x30?text=Sign" alt="Signature"
+                                                class="signature-img"></td>
+                                        <td><button onclick="openModal(event, 'CHN123')" class="more-btn">⋮</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Amina</td>
                                         <td>Bello</td>
+                                        <td>Sub Admin</td>
                                         <td>AMN456</td>
-                                        <td>
-                                            <button class="edit-btn">E</button>
-                                            <button class="delete-btn">D</button>
+                                        <td><img src="https://via.placeholder.com/50x30?text=Sign" alt="Signature"
+                                                class="signature-img"></td>
+                                        <td><button onclick="openModal(event, 'AMN456')" class="more-btn">⋮</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Emeka</td>
                                         <td>Uche</td>
+                                        <td>Sub Admin</td>
                                         <td>EMK789</td>
-                                        <td>
-                                            <button class="edit-btn">E</button>
-                                            <button class="delete-btn">D</button>
+                                        <td><img src="https://via.placeholder.com/50x30?text=Sign" alt="Signature"
+                                                class="signature-img"></td>
+                                        <td><button onclick="openModal(event, 'EMK789')" class="more-btn">⋮</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Yetunde</td>
                                         <td>Adeyemi</td>
+                                        <td>user</td>
                                         <td>YET321</td>
-                                        <td>
-                                            <button class="edit-btn">E</button>
-                                            <button class="delete-btn">D</button>
+                                        <td><img src="https://via.placeholder.com/50x30?text=Sign" alt="Signature"
+                                                class="signature-img"></td>
+                                        <td><button onclick="openModal(event, 'YET321')" class="more-btn">⋮</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Segun</td>
                                         <td>Ogunleye</td>
+                                        <td>user</td>
                                         <td>SEG654</td>
-                                        <td>
-                                            <button class="edit-btn">E</button>
-                                            <button class="delete-btn">D</button>
+                                        <td><img src="https://via.placeholder.com/50x30?text=Sign" alt="Signature"
+                                                class="signature-img"></td>
+                                        <td><button onclick="openModal(event, 'SEG654')" class="more-btn">⋮</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+
+
+                            <!-- Modal -->
+                            <!-- Modal -->
+                            <div id="actionModal" class="cps_action-modal-overlay cps_action-modal-hidden">
+                                <div class="cps_action-modal-content">
+                                    <ul class="cps_action-modal-actions">
+                                        <li><button onclick="editAction()">Edit</button></li>
+                                        <li><button onclick="deleteAction()">Delete</button></li>
+                                        <li><button onclick="manageFacility()">Manage Facility</button></li>
+                                        <li><button onclick="revokeAccess()">Revoke Access</button></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+
                         </div>
 
                     </div>
+
+                    <div id="facility" class="tab-content">
+                        <button class="back-btn" onclick="goBack()" style="display: none;">>← Back</button>
+                        <h1>Create Facility</h2>
+
+                            <form>
+                                <div class="form-group floating-label">
+                                    <input type="text" id="facilityName" placeholder=" " required />
+                                    <label for="facilityName">Facility Name</label>
+                                </div>
+
+                                <div class="form-group floating-label">
+                                    <input type="text" id="facilityType" placeholder=" " required />
+                                    <label for="facilityType">Facility Type</label>
+                                </div>
+
+                                <div class="form-group floating-label">
+                                    <input type="text" id="address" placeholder=" " required />
+                                    <label for="address">Address</label>
+                                </div>
+
+                                <div class="form-group floating-label">
+                                    <input type="text" id="latitude" placeholder=" " required />
+                                    <label for="latitude">Latitude</label>
+                                </div>
+
+                                <div class="form-group floating-label">
+                                    <input type="text" id="longitude" placeholder=" " required />
+                                    <label for="longitude">Longitude</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="submit-btn">Save Facility</button>
+                                </div>
+
+
+                            </form>
+                            <div class="table-container" style="margin-top: 20px;">
+                                <h1>Existing Facility</h1>
+                                <table id="facilityTable" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>Facility Name</th>
+                                            <th>Facility Type</th>
+                                            <th>Address</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Apapa</td>
+                                            <td>storage</td>
+                                            <td>No 4 Apapa way</td>
+                                            <td>L123456</td>
+                                            <td>L345678</td>
+                                            <td><button onclick="openModal(event, 'pp123')" class="more-btn">⋮</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apapa</td>
+                                            <td>storage</td>
+                                            <td>No 4 Apapa way</td>
+                                            <td>L123456</td>
+                                            <td>L345678</td>
+                                            <td><button onclick="openModal(event, 'pp134')" class="more-btn">⋮</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apapa</td>
+                                            <td>storage</td>
+                                            <td>No 4 Apapa way</td>
+                                            <td>L123456</td>
+                                            <td>L345678</td>
+                                            <td><button onclick="openModal(event, 'pp135')" class="more-btn">⋮</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apapa</td>
+                                            <td>storage</td>
+                                            <td>No 4 Apapa way</td>
+                                            <td>L123456</td>
+                                            <td>L345678</td>
+                                            <td><button onclick="openModal(event, 'pp136')" class="more-btn">⋮</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apapa</td>
+                                            <td>storage</td>
+                                            <td>No 4 Apapa way</td>
+                                            <td>L123456</td>
+                                            <td>L345678</td>
+                                            <td><button onclick="openModal(event, 'pp137')" class="more-btn">⋮</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div id="actionModal2" class="cps_action-modal-overlay cps_action-modal-hidden">
+                                <div class="cps_action-modal-content">
+                                    <ul class="cps_action-modal-actions">
+                                        <li><button onclick="editAction()">Edit</button></li>
+                                        <li><button onclick="deleteAction()">Delete</button></li>
+                                        <li><button onclick="manageFacility()">Manage Facility</button></li>
+                                        <li><button onclick="revokeAccess()">Revoke Access</button></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                    </div>
+
 
 
 
@@ -1456,7 +1617,107 @@
         </main>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('#subUserTable').DataTable({
+                responsive: true
+            });
+        });
+
+        $(document).ready(function () {
+            $('#facilityTable').DataTable({
+                responsive: true
+            });
+        });
+
+        // Get modal element
+        const actionModal = document.getElementById('actionModal');
+        const actionModal2 = document.getElementById('actionModal2');
+
+        // Function to open the modal and position it next to the button
+        function openModal(event, userCode) {
+            // alert('me')
+            const button = event.target; // Get the clicked button
+
+            // Get the button's position on the screen
+            const rect = button.getBoundingClientRect();
+
+            // Set the modal's position based on the button's position
+            actionModal.style.left = `${rect.right + window.scrollX}px`; // Position it right next to the button
+            actionModal.style.top = `${rect.top + window.scrollY}px`;  // Align it with the button's vertical position
+            actionModal2.style.left = `${rect.right + window.scrollX}px`; // Position it right next to the button
+            actionModal2.style.top = `${rect.top + window.scrollY}px`;  // Align it with the button's vertical position
+
+            // Make the modal visible
+            actionModal.classList.remove('cps_action-modal-hidden');
+            actionModal2.classList.remove('cps_action-modal-hidden');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            actionModal.classList.add('cps_action-modal-hidden');
+            actionModal2.classList.add('cps_action-modal-hidden');
+        }
+
+        // Action button functions
+        function editAction() {
+            closeModal();
+            alert('Edit action clicked!');
+        }
+
+        function deleteAction() {
+            closeModal();
+            alert('Delete action clicked!');
+        }
+
+        function manageFacility() {
+            closeModal();
+            alert('Manage Facility action clicked!');
+        }
+
+        function revokeAccess() {
+            closeModal();
+            alert('Revoke Access action clicked!');
+        }
+
+        // Optional: Close modal if clicking outside the content
+        window.addEventListener('click', function (event) {
+            if (event.target === actionModal) {
+                closeModal();
+            } else if (event.target === actionModal2) {
+                closeModal()
+            }
+        });
+
+        // Close the modal when clicking outside the modal content
+        const modalOverlay = document.querySelector('.cps_action-modal-overlay');
+        modalOverlay.addEventListener('click', function (event) {
+            if (event.target !== modalOverlay) {
+                modalOverlay.classList.add('cps_action-modal-hidden'); // Hide the modal
+            }
+        });
+
+
+
+
+
+        const toggleSidebar = () => {
+            const asidenav = document.querySelector(".epod_cont aside");
+            asidenav.classList.add('shownav')
+        }
+
+        const handleCloseSidebar = () => {
+            const asidenav = document.querySelector(".epod_cont aside");
+            asidenav.classList.remove('shownav')
+        }
+
+
+
+
         const trigger = document.querySelector('.trigger_remark');
         const popup = document.querySelector('.popup_remark');
         const textarea = document.querySelector('#remarkv');
@@ -1497,10 +1758,20 @@
             }
         }
 
+        function switchToSettings() {
+            document.querySelector('.epod_contents').style.display = 'none';
+            document.querySelector('.settings-container').style.display = 'flex'; // Flex since your settings use flex
+        }
+
         function goBack() {
             document.querySelector('.main-content').classList.remove('active');
             document.querySelector('.sidebar').classList.remove('hidden');
             document.querySelector('.back-btn').style.display = 'none';
+        }
+
+        function goBack1() {
+            document.querySelector('.settings-container').style.display = 'none';
+            document.querySelector('.epod_contents').style.display = 'flex';
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/share-this/1.3.1/share-this.js"
