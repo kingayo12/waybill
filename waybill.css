@@ -910,8 +910,6 @@
 }
 
 .cpsl .waybill_container2 .header .logo_cont.consignee_logo {
-  /* width: 100px !important; */
-  /* background: red; */
   display: flex;
   align-items: center;
   justify-content: center;

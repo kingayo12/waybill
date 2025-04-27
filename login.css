@@ -206,7 +206,9 @@ form {
     width: 100vw;
     height: 100vh;
     padding: 0;
-    /* background: transparent; */
+    /* align-items: start; */
+    background-position: 50%;
+    justify-content: start !important;
     backdrop-filter: blur(0);
     z-index: 99;
   }
@@ -223,10 +225,15 @@ form {
   }
 
   .login_container {
-    background: url(./11806949_4835729.jpg);
-    background-position: right;
+    background-position: left;
     background-size: cover;
     background-blend-mode: overlay;
+    z-index: 99999;
+  }
+
+  .form {
+    justify-content: start;
+    margin-top: 100px;
   }
 }
 
